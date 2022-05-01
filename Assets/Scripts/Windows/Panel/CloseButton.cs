@@ -1,5 +1,4 @@
 using System;
-using Windows.Browser;
 using Taskbar_And_Tasks;
 using UnityEngine;
 
@@ -9,10 +8,10 @@ namespace Windows.Panel
 	{
 		public void OnClick()
 		{
-			if (!(FindObjectOfType(typeof(TaskBar)) is TaskBar taskBar))
+			if (FindObjectOfType(typeof(TaskBar)) is not TaskBar taskBar)
 				throw new NullReferenceException("TaskBarNotFound");
 		
-			var task = gameObject.GetComponentInParent<BrowserWindow>().currentTask;
+			var task = gameObject.GetComponentInParent<Window>().currentTask;
 
 			taskBar.EndTask(task);
 		}

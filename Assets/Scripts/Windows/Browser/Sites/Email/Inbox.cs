@@ -6,13 +6,14 @@ namespace Windows.Browser.Sites.Email
 {
 	public class Inbox : MonoBehaviour
 	{
-		private Email _emailPrefab;
 		private static readonly List<IEmailData> ReceivedEmails = new List<IEmailData>
 		{
 			new FirstEmail()
 		};
 
-		public void AddEmail(IEmailData emailData) => ReceivedEmails.Add(emailData);
+		private Email _emailPrefab;
+
+		public static void AddEmail(IEmailData emailData) => ReceivedEmails.Add(emailData);
 
 		private void Awake()
 		{

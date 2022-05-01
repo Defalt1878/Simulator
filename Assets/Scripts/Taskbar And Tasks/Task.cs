@@ -7,13 +7,18 @@ namespace Taskbar_And_Tasks
 	{
 		private protected Window Window;
 		private bool _isMinimized;
+
 		public bool IsMinimized
 		{
 			get => _isMinimized;
 			set
 			{
 				_isMinimized = value;
-				Window.gameObject.SetActive(!_isMinimized);
+				var currentPos = (Vector2) Window.transform.position;
+				if (_isMinimized)
+					Window.transform.position = new Vector3(currentPos.x, currentPos.y, -1000);
+				else
+					Window.transform.position = currentPos;
 			}
 		}
 
@@ -28,7 +33,7 @@ namespace Taskbar_And_Tasks
 			if (Window != null)
 				Destroy(Window.gameObject);
 		}
-	
+
 		public void OnClick() => IsMinimized = !IsMinimized;
 	}
 }
