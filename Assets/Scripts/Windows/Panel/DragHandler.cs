@@ -5,25 +5,26 @@ namespace Windows.Panel
 	public class DragHandler : MonoBehaviour
 	{
 		private Vector2 _lastMousePos;
-		private Transform _draggingObject;
+		private Window _window;
 		private Camera _camera;
 
 		private void Awake()
 		{
 			_camera = Camera.main;
-			_draggingObject = GetComponentInParent<Window>().transform;
+			_window = GetComponentInParent<Window>();
 		}
 
 		private void OnMouseDown()
 		{
 			_lastMousePos = _camera.ScreenToWorldPoint(Input.mousePosition);
+			_window.currentTask.IsMinimized = false;
 		}
 
 		private void OnMouseDrag()
 		{
 			var mousePos = (Vector2) _camera.ScreenToWorldPoint(Input.mousePosition);
 			var mouseDelta = mousePos - _lastMousePos;
-			_draggingObject.position += (Vector3) mouseDelta;
+			_window.transform.position += (Vector3) mouseDelta;
 			_lastMousePos = mousePos;
 		}
 		

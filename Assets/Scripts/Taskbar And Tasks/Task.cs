@@ -5,8 +5,10 @@ namespace Taskbar_And_Tasks
 {
 	public abstract class Task : MonoBehaviour
 	{
-		private protected Window Window;
+		private Window _window;
 		private bool _isMinimized;
+		private Canvas _windowCanvas;
+		private TaskBar _taskBar;
 
 		public bool IsMinimized
 		{
@@ -14,26 +16,40 @@ namespace Taskbar_And_Tasks
 			set
 			{
 				_isMinimized = value;
-				var currentPos = (Vector2) Window.transform.position;
-				if (_isMinimized)
-					Window.transform.position = new Vector3(currentPos.x, currentPos.y, -1000);
-				else
-					Window.transform.position = currentPos;
+				_windowCanvas.enabled = !_isMinimized;
+				if (!_isMinimized)
+					_taskBar.TryMoveUpTask(this);
 			}
 		}
 
-		private void Start()
+		public int Priority
 		{
-			Window = Instantiate(Window, TaskBar.Desktop.transform);
-			Window.currentTask = this;
+			get => _windowCanvas.sortingOrder;
+			set => _windowCanvas.sortingOrder = value;
+		}
+
+		public void Awake()
+		{
+			_window = Resources.Load<Window>(TargetWindowPath);
+			_window = Instantiate(_window, TaskBar.Desktop.transform);
+			_windowCanvas = _window.gameObject.GetComponent<Canvas>();
+			_window.currentTask = this;
+
+			_taskBar = GetComponentInParent<TaskBar>();
 		}
 
 		public virtual void OnDestroy()
 		{
-			if (Window != null)
-				Destroy(Window.gameObject);
+			if (_window != null)
+				Destroy(_window.gameObject);
 		}
 
-		public void OnClick() => IsMinimized = !IsMinimized;
+		public void OnClick()
+		{
+			if (_isMinimized || !_taskBar.TryMoveUpTask(this))
+				IsMinimized = !IsMinimized;
+		}
+
+		private protected abstract string TargetWindowPath { get; }
 	}
 }
