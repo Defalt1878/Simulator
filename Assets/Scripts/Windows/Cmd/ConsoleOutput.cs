@@ -1,28 +1,51 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using System.Text;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
-using Random = UnityEngine.Random;
 
 namespace Windows.Cmd
 {
 	public class ConsoleOutput : MonoBehaviour
 	{
-		private Text _consoleLine;
+		public bool UserCanPrint { get; set; }
+		
+		private const int MaxLines = 50;
+		private InputField _consoleLine;
+		private LinkedList<InputField> _lines;
+		private ServersCrack _serversCrack;
 
 		private void Awake()
 		{
-			_consoleLine = Resources.Load<Text>(Path.Combine("Windows", "CmdWindow", "Line"));
+			_consoleLine = Resources.Load<InputField>(Path.Combine("Windows", "CmdWindow", "Line"));
+			_lines = new LinkedList<InputField>();
+			_serversCrack = gameObject.AddComponent<ServersCrack>();
+			_serversCrack.Console = this;
+			UserCanPrint = true;
 		}
 
 		public void HandleUserCommand(string command)
 		{
-			var consoleLine = Instantiate(_consoleLine, transform);
-			consoleLine.text = $"> {command}";
-			consoleLine.color = CmdColors.UserInput;
+			Print($"> {command}", CmdColors.UserInput);
 			ParseCommand(command);
+		}
+
+		internal void Print(string command, Color color)
+		{
+			var consoleLine = Instantiate(_consoleLine, transform);
+			consoleLine.text = command;
+			consoleLine.GetComponentInChildren<Text>().color = color;
+			_lines.AddLast(consoleLine);
+			if (_lines.Count <= MaxLines)
+				return;
+			Destroy(_lines.First.Value.gameObject);
+			_lines.RemoveFirst();
+		}
+
+		internal void ReplaceLast(string command)
+		{
+			var line = _lines.Last.Value;
+			line.text = command;
 		}
 
 		private void ParseCommand(string command)
@@ -31,53 +54,68 @@ namespace Windows.Cmd
 			switch (parts[0])
 			{
 				case "find":
-					StartCoroutine(TryFindServers(parts));
+				{
+					if (parts.Length != 3 || parts[1] != "servers")
+						goto default;
+					if (!int.TryParse(parts[2], out var count) || count <= 0)
+					{
+						WrongDataError(parts[2]);
+						return;
+					}
+
+					_serversCrack.FindServers(count);
 					break;
+				}
+
+				case "connect":
+				{
+					if (parts.Length != 2)
+						goto default;
+					if (parts[1].Count(char.IsNumber) != 9)
+					{
+						WrongDataError(parts[2]);
+						return;
+					}
+
+					_serversCrack.Connect(parts[1]);
+					break;
+				}
+
+				case "disconnect":
+				{
+					_serversCrack.Disconnect();
+					break;
+				}
+
+				case "get":
+				{
+					if (parts.Length != 3 || parts[1] != "packages")
+						goto default;
+					if (!int.TryParse(parts[2], out var count) || count <= 0)
+					{
+						WrongDataError(parts[2]);
+						return;
+					}
+
+					_serversCrack.GetPackages(count);
+					break;
+				}
+
+				case "crack":
+				{
+					if (parts.Length != 2)
+						goto default;
+					_serversCrack.TryCrack(parts[1]);
+					break;
+				}
+
 				default:
 					UnknownCommandError();
 					break;
 			}
 		}
 
-		private IEnumerator TryFindServers(IReadOnlyList<string> parts)
-		{
-			if (parts.Count != 3 || parts[1] != "servers")
-				UnknownCommandError();
-
-			if (!int.TryParse(parts[2], out var count) || count <= 0)
-				WrongDataError(parts[2]);
-
-			for (var i = 0; i < count; i++)
-			{
-				yield return new WaitForSeconds(Random.Range(0.02f, 0.5f));
-				var ip = new StringBuilder();
-				for (var j = 1; j <= 9; j++)
-				{
-					ip.Append(Random.Range(0, 10));
-					if (j % 3 == 0 && j != 9)
-						ip.Append('.');
-				}
-
-				var consoleLine = Instantiate(_consoleLine, transform);
-				consoleLine.text = $"- {ip}";
-				consoleLine.color = Random.Range(0, 11) == 0
-					? CmdColors.ImportantMessage
-					: CmdColors.DefaultOutput;
-			}
-		}
-
-		private void UnknownCommandError()
-		{
-			var consoleLine = Instantiate(_consoleLine, transform);
-			consoleLine.text = "Unknown command! Please try again.";
-			consoleLine.color = CmdColors.Error;
-		}
-
-		private void WrongDataError(string data)
-		{
-			var consoleLine = Instantiate(_consoleLine, transform);
-			consoleLine.text = $"Wrong data: \"{data}\"!";
-			consoleLine.color = CmdColors.Error;
-		}
+		private void UnknownCommandError() => Print("Unknown command! Please try again.", CmdColors.Error);
+		private void WrongDataError(string data) => Print($"Wrong data: \"{data}\"!", CmdColors.Error);
 	}
 }
