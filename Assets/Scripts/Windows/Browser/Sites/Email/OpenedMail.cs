@@ -5,7 +5,7 @@ namespace Windows.Browser.Sites.Email
 {
 	public class OpenedMail : MonoBehaviour
 	{
-		public IEmailData EmailData
+		public EmailData EmailData
 		{
 			get => _emailData;
 			set
@@ -14,19 +14,19 @@ namespace Windows.Browser.Sites.Email
 				UpdateEmail();
 			}
 		}
-		private IEmailData _emailData;
+		private EmailData _emailData;
 		
 		private Image _avatar;
 		private Text _senderName;
 		private Text _subject;
-		private Text _text;
+		private Transform _content;
 
-		void Awake()
+		private void Awake()
 		{
 			_avatar = transform.Find("Avatar").GetComponent<Image>();
 			_senderName = transform.Find("SenderName").GetComponent<Text>();
 			_subject = transform.Find("Subject").GetComponent<Text>();
-			_text = transform.Find("Text").GetComponent<Text>();
+			_content = transform.Find("Content");
 		}
 
 		private void UpdateEmail()
@@ -34,7 +34,8 @@ namespace Windows.Browser.Sites.Email
 			_avatar.sprite = EmailData.AvatarSprite;
 			_senderName.text = EmailData.SenderName;
 			_subject.text = EmailData.Subject;
-			_text.text = EmailData.Text;
+			Destroy(_content.gameObject);
+			_content = Instantiate(EmailData.Content, transform);
 		}
 	}
 }

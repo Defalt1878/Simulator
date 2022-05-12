@@ -5,7 +5,7 @@ namespace Windows.Browser.Sites.Email
 {
 	public class Email : MonoBehaviour
 	{
-		public IEmailData EmailData
+		public EmailData EmailData
 		{
 			get => _emailData;
 			set
@@ -15,7 +15,7 @@ namespace Windows.Browser.Sites.Email
 			}
 		}
 
-		private IEmailData _emailData;
+		private EmailData _emailData;
 
 		private OpenedMail _openedMail;
 
@@ -33,8 +33,7 @@ namespace Windows.Browser.Sites.Email
 
 		private void UpdateEmail()
 		{
-			if (EmailData.AvatarSprite != null)
-				_avatar.sprite = EmailData.AvatarSprite;
+			_avatar.sprite = EmailData.AvatarSprite;
 			_senderName.text = EmailData.SenderName;
 			_subject.text = EmailData.Subject;
 		}

@@ -1,5 +1,5 @@
 using System;
-using Taskbar_And_Tasks;
+using TaskbarAndTasks;
 using UnityEngine;
 
 namespace Windows.Panel

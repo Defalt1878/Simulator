@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace Windows.Browser.Sites.Email
 {
-	public class EmailPage : Site
+	public class EmailPage : Page
 	{
 		public override string Name => "Email";
 		public OpenedMail OpenedMail { get; private set; }
