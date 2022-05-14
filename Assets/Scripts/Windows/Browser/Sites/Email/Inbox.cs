@@ -6,14 +6,14 @@ namespace Windows.Browser.Sites.Email
 {
 	public class Inbox : MonoBehaviour
 	{
-		private static readonly List<EmailData> ReceivedEmails = new()
+		private Email _emailPrefab;
+
+		private static readonly List<EmailData> EmailsData = new()
 		{
 			new FirstEmail()
 		};
 
-		private Email _emailPrefab;
-
-		public static void AddEmail(EmailData emailData) => ReceivedEmails.Add(emailData);
+		// public static void AddEmail(EmailData emailData) => StaticData.GetInstance().ReceivedEmailsCount.Add(emailData);
 
 		private void Awake()
 		{
@@ -22,10 +22,10 @@ namespace Windows.Browser.Sites.Email
 
 		private void Start()
 		{
-			foreach (var receivedEmail in ReceivedEmails)
+			for (var i = 0; i < StaticData.GetInstance().ReceivedEmailsCount; i++)
 			{
 				var email = Instantiate(_emailPrefab, transform);
-				email.EmailData = receivedEmail;
+				email.EmailData = EmailsData[i];
 			}
 		}
 	}

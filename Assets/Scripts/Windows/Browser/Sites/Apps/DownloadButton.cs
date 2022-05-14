@@ -20,7 +20,7 @@ namespace Windows.Browser.Sites.Apps
 
 		public void OnClick()
 		{
-			AppsPage.AvailableToDownloadApps.Remove(DownloadingAppName);
+			StaticData.GetInstance().AvailableToDownloadApps.Remove(DownloadingAppName);
 			StartCoroutine(DownloadCoroutine());
 		}
 
@@ -37,8 +37,8 @@ namespace Windows.Browser.Sites.Apps
 				yield return new WaitForSeconds(DownloadTime / 100);
 				_buttonImage.fillAmount = i / 100f;
 			}
-
-			Shortcuts.NewShortcut(DownloadingAppName);
+			
+			StaticData.GetInstance().Shortcuts.Add(DownloadingAppName);
 			_button.colors = defaultColors;
 		}
 	}

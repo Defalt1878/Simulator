@@ -1,19 +1,27 @@
 using System;
+using System.IO;
 using TaskbarAndTasks;
 using UnityEngine;
 
 namespace DesktopShortcuts
 {
-    public class Shortcut : MonoBehaviour
-    {
-        private protected Task Task;
-        
-        public void OnClick()
-        {
-            if (FindObjectOfType(typeof(TaskBar)) is not TaskBar taskBar)
-                throw new NullReferenceException("TaskBarNotFound");
+	public abstract class Shortcut : MonoBehaviour
+	{
+		private protected abstract string TaskName { get; }
 
-            taskBar.AddOrExpandTask(Task);
-        }
-    }
+		[NonSerialized] private Task _task;
+
+		private void Awake()
+		{
+			_task = Resources.Load<Task>(Path.Combine("TaskBar", TaskName));
+		}
+
+		public void OnClick()
+		{
+			if (FindObjectOfType(typeof(TaskBar)) is not TaskBar taskBar)
+				throw new NullReferenceException("TaskBarNotFound");
+
+			taskBar.AddOrExpandTask(_task);
+		}
+	}
 }

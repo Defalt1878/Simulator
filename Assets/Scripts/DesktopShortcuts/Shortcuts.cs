@@ -6,21 +6,27 @@ namespace DesktopShortcuts
 {
 	public class Shortcuts : MonoBehaviour
 	{
-		private static readonly List<Shortcut> _shortcuts = new();
 		private const string ShortcutsPath = "Shortcuts";
-		private static Transform _desktopShortcuts;
+		private List<string> _shortcuts;
 
 		private void Awake()
 		{
-			_desktopShortcuts = transform;
-			NewShortcut("Browser");
+			_shortcuts = StaticData.GetInstance().Shortcuts;
 		}
 
-		public static void NewShortcut(string shortcutName)
+		private void Update()
+		{
+			if (_shortcuts.Count == transform.childCount)
+				return;
+			var childCount = transform.childCount;
+			for (var i = 0; i < _shortcuts.Count - childCount; i++)
+				InstantiateShortcut(_shortcuts[childCount + i]);
+		}
+
+		private void InstantiateShortcut(string shortcutName)
 		{
 			var shortcut = Resources.Load<Shortcut>(Path.Combine(ShortcutsPath, shortcutName));
-			shortcut = Instantiate(shortcut, _desktopShortcuts);
-			_shortcuts.Add(shortcut);
+			Instantiate(shortcut, transform);
 		}
 	}
 }

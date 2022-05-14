@@ -6,9 +6,6 @@ namespace DesktopShortcuts
 {
 	public class BrowserShortcut : Shortcut
 	{
-		private void Awake()
-		{
-			Task = Resources.Load<Task>(Path.Combine("TaskBar", "BrowserTask"));
-		}
+		private protected override string TaskName => "BrowserTask";
 	}
 }

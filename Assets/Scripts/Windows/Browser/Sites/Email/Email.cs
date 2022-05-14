@@ -33,7 +33,7 @@ namespace Windows.Browser.Sites.Email
 
 		private void UpdateEmail()
 		{
-			_avatar.sprite = EmailData.AvatarSprite;
+			_avatar.sprite = EmailData.GetAvatarSprite();
 			_senderName.text = EmailData.SenderName;
 			_subject.text = EmailData.Subject;
 		}
