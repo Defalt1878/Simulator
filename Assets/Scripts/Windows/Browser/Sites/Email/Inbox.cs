@@ -13,8 +13,6 @@ namespace Windows.Browser.Sites.Email
 			new FirstEmail()
 		};
 
-		// public static void AddEmail(EmailData emailData) => StaticData.GetInstance().ReceivedEmailsCount.Add(emailData);
-
 		private void Awake()
 		{
 			_emailPrefab = Resources.Load<Email>(Path.Combine("Windows", "Browser", "Email", "Mail"));

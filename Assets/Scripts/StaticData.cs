@@ -22,7 +22,7 @@ public class StaticData
 	private StaticData()
 	{
 		Shortcuts = new List<string> {"Browser"};
-		AvailableToDownloadApps = new HashSet<string> {"CMD"};
+		AvailableToDownloadApps = new HashSet<string>();
 		ReceivedEmailsCount = 1;
 	}
 

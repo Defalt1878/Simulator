@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using UnityEngine;
 
@@ -13,6 +14,8 @@ namespace Windows.Browser.Sites.Email
 
 		public Transform Content => _content ??=
 			Resources.Load<Transform>(Path.Combine("Emails", EmailFolder, "Content"));
+
+		public abstract void OnOpen();
 
 		private protected abstract string EmailFolder { get; }
 		private Sprite _avatarSprite;

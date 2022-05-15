@@ -10,6 +10,7 @@ namespace Windows.Browser.Sites.Apps
 		public string DownloadingAppName { get; set; }
 		private Image _buttonImage;
 		private Button _button;
+		public bool Downloading { get; private set; }
 		public bool Active
 		{
 			get => _button.interactable;
@@ -20,11 +21,12 @@ namespace Windows.Browser.Sites.Apps
 		{
 			_buttonImage = GetComponent<Image>();
 			_button = GetComponent<Button>();
+			Downloading = false;
 		}
 
 		public void OnClick()
 		{
-			StaticData.GetInstance().AvailableToDownloadApps.Remove(DownloadingAppName);
+			Downloading = true;
 			StartCoroutine(DownloadCoroutine());
 		}
 
@@ -43,6 +45,7 @@ namespace Windows.Browser.Sites.Apps
 			}
 
 			StaticData.GetInstance().Shortcuts.Add(DownloadingAppName);
+			StaticData.GetInstance().AvailableToDownloadApps.Remove(DownloadingAppName);
 			_button.colors = defaultColors;
 		}
 	}

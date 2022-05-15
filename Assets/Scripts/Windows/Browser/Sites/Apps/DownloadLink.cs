@@ -16,7 +16,9 @@ namespace Windows.Browser.Sites.Apps
 
 		private void Update()
 		{
-			_downloadButton.Active = StaticData.GetInstance().AvailableToDownloadApps.Contains(downloadingAppName);
+			_downloadButton.Active = 
+				StaticData.GetInstance().AvailableToDownloadApps.Contains(downloadingAppName) &&
+				!_downloadButton.Downloading;
 		}
 	}
 }

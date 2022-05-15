@@ -23,14 +23,16 @@ namespace Windows.Browser.Sites.Email
 
 		private void Awake()
 		{
-			_avatar = transform.Find("Avatar").GetComponent<Image>();
-			_senderName = transform.Find("SenderName").GetComponent<Text>();
-			_subject = transform.Find("Subject").GetComponent<Text>();
+			var header = transform.Find("Header");
+			_avatar = header.Find("Avatar").GetComponent<Image>();
+			_senderName = header.Find("SenderName").GetComponent<Text>();
+			_subject = header.Find("Subject").GetComponent<Text>();
 			_content = transform.Find("Content");
 		}
 
 		private void UpdateEmail()
 		{
+			EmailData.OnOpen();
 			_avatar.sprite = EmailData.AvatarSprite;
 			_senderName.text = EmailData.SenderName;
 			_subject.text = EmailData.Subject;
