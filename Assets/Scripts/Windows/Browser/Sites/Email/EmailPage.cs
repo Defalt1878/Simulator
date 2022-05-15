@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace Windows.Browser.Sites.Email
 {
 	public class EmailPage : Page

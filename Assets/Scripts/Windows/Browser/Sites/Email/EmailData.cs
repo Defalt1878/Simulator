@@ -1,4 +1,3 @@
-using System;
 using System.IO;
 using UnityEngine;
 
@@ -8,11 +7,15 @@ namespace Windows.Browser.Sites.Email
 	{
 		public abstract string SenderName { get; }
 		public abstract string Subject { get; }
-		private protected abstract string EmailFolder { get; }
 
-		public Sprite GetAvatarSprite() =>
+		public Sprite AvatarSprite => _avatarSprite ??=
 			Resources.Load<SpriteRenderer>(Path.Combine("Emails", EmailFolder, "Avatar")).sprite;
-		
-		public Transform GetContent() => Resources.Load<Transform>(Path.Combine("Emails", EmailFolder, "Content"));
+
+		public Transform Content => _content ??=
+			Resources.Load<Transform>(Path.Combine("Emails", EmailFolder, "Content"));
+
+		private protected abstract string EmailFolder { get; }
+		private Sprite _avatarSprite;
+		private Transform _content;
 	}
 }

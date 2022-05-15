@@ -31,11 +31,11 @@ namespace Windows.Browser.Sites.Email
 
 		private void UpdateEmail()
 		{
-			_avatar.sprite = EmailData.GetAvatarSprite();
+			_avatar.sprite = EmailData.AvatarSprite;
 			_senderName.text = EmailData.SenderName;
 			_subject.text = EmailData.Subject;
 			Destroy(_content.gameObject);
-			_content = Instantiate(EmailData.GetContent(), transform);
+			_content = Instantiate(EmailData.Content, transform);
 		}
 	}
 }

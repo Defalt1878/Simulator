@@ -1,5 +1,3 @@
-using System;
-
 namespace Windows.Browser.Sites.Email
 {
 	public class FirstEmail : EmailData

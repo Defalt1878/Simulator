@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
@@ -7,20 +6,19 @@ namespace DesktopShortcuts
 	public class Shortcuts : MonoBehaviour
 	{
 		private const string ShortcutsPath = "Shortcuts";
-		private List<string> _shortcuts;
-
-		private void Awake()
-		{
-			_shortcuts = StaticData.GetInstance().Shortcuts;
-		}
 
 		private void Update()
 		{
-			if (_shortcuts.Count == transform.childCount)
+			var shortcuts = StaticData.GetInstance().Shortcuts;
+			if (shortcuts.Count == transform.childCount)
 				return;
+			if (shortcuts.Count < transform.childCount)
+				foreach (Transform child in transform)
+					Destroy(child.gameObject);
+
 			var childCount = transform.childCount;
-			for (var i = 0; i < _shortcuts.Count - childCount; i++)
-				InstantiateShortcut(_shortcuts[childCount + i]);
+			for (var i = 0; i < shortcuts.Count - childCount; i++)
+				InstantiateShortcut(shortcuts[childCount + i]);
 		}
 
 		private void InstantiateShortcut(string shortcutName)

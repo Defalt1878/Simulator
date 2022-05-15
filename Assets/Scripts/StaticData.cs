@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Reflection;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
@@ -58,5 +59,14 @@ public static class DataSaver
 			if (savedValue is not null)
 				field.SetValue(currentData, savedValue);
 		}
+	}
+
+	public static void ResetData()
+	{
+		if (File.Exists(DataSavePath))
+			File.Delete(DataSavePath);
+		var instance = typeof(StaticData).GetField("_instance", BindingFlags.NonPublic | BindingFlags.Static);
+		instance?.SetValue(null, null);
+		StaticData.GetInstance();
 	}
 }

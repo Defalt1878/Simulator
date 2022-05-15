@@ -1,6 +1,4 @@
 using Windows.Cmd;
-using UnityEngine;
-using UnityEngine.UI;
 
 namespace Windows
 {
