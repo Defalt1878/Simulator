@@ -17,7 +17,7 @@ namespace Windows.Panel
 		private void OnMouseDown()
 		{
 			_lastMousePos = _camera.ScreenToWorldPoint(Input.mousePosition);
-			_window.currentTask.IsMinimized = false;
+			_window.CurrentTask.IsMinimized = false;
 		}
 
 		private void OnMouseDrag()

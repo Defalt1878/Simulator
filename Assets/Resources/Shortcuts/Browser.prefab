@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2020424874602149643}
   - component: {fileID: 2020424874602149642}
   - component: {fileID: 2020424874602149645}
-  - component: {fileID: 5149776493686410880}
+  - component: {fileID: 1112549842541354819}
   m_Layer: 5
   m_Name: Browser
   m_TagString: Untagged
@@ -123,8 +123,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5149776493686410880}
-        m_TargetAssemblyTypeName: BrowserShortcut, Assembly-CSharp
+      - m_Target: {fileID: 1112549842541354819}
+        m_TargetAssemblyTypeName: DesktopShortcuts.Shortcut, Assembly-CSharp
         m_MethodName: OnClick
         m_Mode: 1
         m_Arguments:
@@ -135,7 +135,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &5149776493686410880
+--- !u!114 &1112549842541354819
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -144,9 +144,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2020424874602149647}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 08fa4333a009d7845bdb72dd98c21b57, type: 3}
+  m_Script: {fileID: 11500000, guid: 405010ecfeef908498c42cb2ab7719f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  task: {fileID: 1097491883139391215, guid: 531e30cb1dd52c94b987968b16f33a49, type: 3}
 --- !u!1 &2020424875415990874
 GameObject:
   m_ObjectHideFlags: 0

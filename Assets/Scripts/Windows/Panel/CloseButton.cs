@@ -11,7 +11,7 @@ namespace Windows.Panel
 			if (FindObjectOfType(typeof(TaskBar)) is not TaskBar taskBar)
 				throw new NullReferenceException("TaskBarNotFound");
 		
-			var task = gameObject.GetComponentInParent<Window>().currentTask;
+			var task = gameObject.GetComponentInParent<Window>().CurrentTask;
 
 			taskBar.EndTask(task);
 		}

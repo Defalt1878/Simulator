@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,15 +8,16 @@ namespace Windows.Cmd
 	public class ConsoleOutput : MonoBehaviour
 	{
 		public bool UserCanPrint { get; set; }
-		
+
 		private const int MaxLines = 50;
-		private InputField _consoleLine;
+
+		[SerializeField] private InputField consoleLine;
+
 		private LinkedList<InputField> _lines;
 		private ServersCrack _serversCrack;
 
 		private void Awake()
 		{
-			_consoleLine = Resources.Load<InputField>(Path.Combine("Windows", "CmdWindow", "Line"));
 			_lines = new LinkedList<InputField>();
 			_serversCrack = gameObject.AddComponent<ServersCrack>();
 			_serversCrack.Console = this;
@@ -32,10 +32,10 @@ namespace Windows.Cmd
 
 		internal void Print(string command, Color color)
 		{
-			var consoleLine = Instantiate(_consoleLine, transform);
-			consoleLine.text = command;
-			consoleLine.GetComponentInChildren<Text>().color = color;
-			_lines.AddLast(consoleLine);
+			var instLine = Instantiate(consoleLine, transform);
+			instLine.text = command;
+			instLine.GetComponentInChildren<Text>().color = color;
+			_lines.AddLast(instLine);
 			if (_lines.Count <= MaxLines)
 				return;
 			Destroy(_lines.First.Value.gameObject);

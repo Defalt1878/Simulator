@@ -1,3 +1,4 @@
+using Windows.Browser.Pages;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -5,26 +6,27 @@ namespace Windows.Browser
 {
 	public class SitePanel : MonoBehaviour
 	{
-		public GameObject CurrentPage { get; set; }
+		private Page _currentPage;
 
-		public string Name
-		{
-			get => _text.text;
-			set => _text.text = value;
-		}
-
-		// private BackButton _backButton;
 		private Text _text;
 
 		private void Awake()
 		{
 			_text = GetComponentInChildren<Text>();
+			GetComponentInChildren<BackButton>().SitePanel = this;
+		}
+
+		public void OpenTab(Page page)
+		{
+			_currentPage = Instantiate(page, GetComponentInParent<BrowserWindow>().transform);
+			gameObject.SetActive(true);
+			_text.text = page.Name;
 		}
 
 		public void CloseTab()
 		{
-			Destroy(CurrentPage);
-			gameObject.SetActive(false);
+			Destroy(_currentPage.gameObject);
+			gameObject.SetActive(false);;
 		}
 	}
 }

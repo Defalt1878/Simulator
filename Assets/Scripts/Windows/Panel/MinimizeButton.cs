@@ -6,7 +6,7 @@ namespace Windows.Panel
 	{
 		public void OnClick()
 		{
-			gameObject.GetComponentInParent<Window>().currentTask.IsMinimized = true;
+			gameObject.GetComponentInParent<Window>().CurrentTask.IsMinimized = true;
 		}
 	}
 }

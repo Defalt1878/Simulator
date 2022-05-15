@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
+using UserData;
 using Random = UnityEngine.Random;
 
 namespace Windows.Cmd
@@ -210,6 +211,7 @@ namespace Windows.Cmd
 
 			Console.Print("Crack successful!", CmdColors.ImportantMessage);
 			var moneyReceived = (int) Math.Round(_packages.Length * Random.Range(1f, 4f));
+			StaticData.GetInstance().Stats.Money += moneyReceived;
 			Debug.Log(moneyReceived);
 			Disconnect();
 

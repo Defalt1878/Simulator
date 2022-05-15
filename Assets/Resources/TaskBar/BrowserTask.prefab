@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1148791663394995560}
   - component: {fileID: 1148791663394995561}
   - component: {fileID: 1148791663394995566}
-  - component: {fileID: 1148791663394995567}
+  - component: {fileID: 1097491883139391215}
   m_Layer: 5
   m_Name: BrowserTask
   m_TagString: TaskBarItem
@@ -30,6 +30,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -121,8 +122,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1148791663394995567}
-        m_TargetAssemblyTypeName: Taskbar_And_Tasks.Task, Assembly-CSharp
+      - m_Target: {fileID: 1097491883139391215}
+        m_TargetAssemblyTypeName: TaskbarAndTasks.Task, Assembly-CSharp
         m_MethodName: OnClick
         m_Mode: 1
         m_Arguments:
@@ -133,7 +134,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &1148791663394995567
+--- !u!114 &1097491883139391215
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -142,6 +143,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1148791663394995565}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b74c2f8bd4b20a4ea68ed5fdbfed371, type: 3}
+  m_Script: {fileID: 11500000, guid: aa430d1cda1b206479a0df63cb75da9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  window: {fileID: 8752585545631609773, guid: 41d95dfe365c308449196e1ee64fa37f, type: 3}

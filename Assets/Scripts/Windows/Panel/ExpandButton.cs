@@ -6,7 +6,6 @@ namespace Windows.Panel
 	public class ExpandButton : MonoBehaviour
 	{
 		private Image _image;
-		private Transform _window;
 		private bool _isExpanded;
 		[SerializeField] private Sprite defaultSprite;
 		[SerializeField] private Sprite expandedSprite;
@@ -14,8 +13,6 @@ namespace Windows.Panel
 		public void Awake()
 		{
 			_image = GetComponentInChildren<Image>();
-			_window = GetComponentInParent<Window>().transform;
-		
 			defaultSprite ??= _image.sprite;
 			expandedSprite ??= defaultSprite;
 		}
@@ -30,7 +27,7 @@ namespace Windows.Panel
 
 		private void Expand()
 		{
-			// _window.
+			//TODO Реализовать функцию открытия на полный экран
 		}
 	}
 }
