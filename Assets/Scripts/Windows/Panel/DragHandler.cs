@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace Windows.Panel
 {
@@ -14,19 +15,20 @@ namespace Windows.Panel
 			_window = GetComponentInParent<Window>();
 		}
 
-		private void OnMouseDown()
+		public void OnDragStarted(BaseEventData eventData)
 		{
-			_lastMousePos = _camera.ScreenToWorldPoint(Input.mousePosition);
+			var pointerEventData = (PointerEventData) eventData;
+			_lastMousePos = _camera.ScreenToWorldPoint(pointerEventData.position);
 			_window.CurrentTask.IsMinimized = false;
 		}
 
-		private void OnMouseDrag()
+		public void OnDrag(BaseEventData eventData)
 		{
-			var mousePos = (Vector2) _camera.ScreenToWorldPoint(Input.mousePosition);
+			var pointerEventData = (PointerEventData) eventData;
+			var mousePos = (Vector2) _camera.ScreenToWorldPoint(pointerEventData.position);
 			var mouseDelta = mousePos - _lastMousePos;
 			_window.transform.position += (Vector3) mouseDelta;
 			_lastMousePos = mousePos;
 		}
-		
 	}
 }

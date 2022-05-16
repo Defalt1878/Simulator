@@ -222,7 +222,7 @@ namespace Windows.Cmd
 		{
 			var elements = Enumerable
 				.Range(0, length)
-				.Select(_ => Random.Range('A', 'Z'))
+				.Select(_ => Random.Range('A', 'Z' + 1))
 				.Select(Convert.ToChar);
 
 			return string.Join("", elements);

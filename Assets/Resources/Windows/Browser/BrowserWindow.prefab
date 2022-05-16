@@ -925,6 +925,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8752585545631609772}
     m_Modifications:
+    - target: {fileID: 6121648735069697340, guid: 9c912370d7ed5444c8d84ffd2b407176, type: 3}
+      propertyPath: m_Size.x
+      value: 1400
+      objectReference: {fileID: 0}
     - target: {fileID: 7362067420197889853, guid: 9c912370d7ed5444c8d84ffd2b407176, type: 3}
       propertyPath: m_Name
       value: Panel

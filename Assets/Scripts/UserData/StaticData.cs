@@ -21,13 +21,15 @@ namespace UserData
 		{
 			Shortcuts = new List<string> {"Browser"};
 			AvailableToDownloadApps = new HashSet<string> {"Stats"};
-			ReceivedEmailsCount = 1;
+			ReceivedEmails = new List<string> {"First"};
+			CompletedEmails = new HashSet<string>();
 			Stats = new GameStats();
 		}
 
 		public List<string> Shortcuts { get; private set; }
-		public HashSet<string> AvailableToDownloadApps { get; private set;}
-		public int? ReceivedEmailsCount { get; private set;}
-		public GameStats Stats { get; private set;}
+		public HashSet<string> AvailableToDownloadApps { get; private set; }
+		public List<string> ReceivedEmails { get; private set; }
+		public HashSet<string> CompletedEmails { get; private set; }
+		public GameStats Stats { get; private set; }
 	}
 }

@@ -7,12 +7,13 @@ namespace Windows.Browser.Pages.Email
 {
 	public class Inbox : MonoBehaviour
 	{
-		[SerializeField]private Email emailPrefab;
+		[SerializeField] private Email emailPrefab;
 		private OpenedMail _openedMail;
 
-		private static readonly List<EmailData> EmailsData = new()
+		private static readonly Dictionary<string, EmailData> EmailsData = new()
 		{
-			new FirstEmail()
+			{"First", new FirstEmail()},
+			{"Miner", new MinerEmail()}
 		};
 
 		private void Awake()
@@ -22,10 +23,10 @@ namespace Windows.Browser.Pages.Email
 
 		private void Start()
 		{
-			for (var i = 0; i < StaticData.GetInstance().ReceivedEmailsCount; i++)
+			foreach (var receivedEmail in StaticData.GetInstance().ReceivedEmails)
 			{
 				var email = Instantiate(emailPrefab, transform);
-				email.EmailData = EmailsData[i];
+				email.EmailData = EmailsData[receivedEmail];
 				email.OpenedMail = _openedMail;
 			}
 		}

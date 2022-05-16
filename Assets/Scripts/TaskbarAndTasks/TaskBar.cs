@@ -13,6 +13,7 @@ namespace TaskbarAndTasks
 		private void Awake()
 		{
 			_runningTasks = new List<Task>();
+			_runningTasksOrder = new List<Task>();
 			Desktop = GameObject.Find("Desktop");
 		}
 

@@ -162,11 +162,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8752585545631609772}
-  - component: {fileID: 6443245917584290010}
+  - component: {fileID: 3816986785511591611}
   - component: {fileID: 6328309269994961377}
   - component: {fileID: 3542881689342458435}
   m_Layer: 5
-  m_Name: StatsWindow
+  m_Name: MinerWIndow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -195,7 +195,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 800, y: 600}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &6443245917584290010
+--- !u!114 &3816986785511591611
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -204,7 +204,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8752585545631609771}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e180c87f1d7b064f8a1665b9d0e4506, type: 3}
+  m_Script: {fileID: 11500000, guid: a7b6b87d3629b174daa99d2528a8f748, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!223 &6328309269994961377

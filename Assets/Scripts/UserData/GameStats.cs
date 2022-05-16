@@ -15,9 +15,11 @@ namespace UserData
 				if (value < 0)
 					throw new ArgumentException();
 				_money = value;
-				OnValueChanged?.Invoke(nameof(Money), Money.ToString());
+				OnValueChanged?.Invoke(nameof(Money), MoneyStr);
 			}
 		}
+
+		public string MoneyStr => $"{Money} $";
 
 		[field: NonSerialized] public event Action<string, string> OnValueChanged;
 	}

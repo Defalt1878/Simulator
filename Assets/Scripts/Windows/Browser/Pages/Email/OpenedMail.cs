@@ -34,7 +34,7 @@ namespace Windows.Browser.Pages.Email
 
 		private void UpdateEmail()
 		{
-			EmailData.OnOpen();
+			EmailData.OnOpen?.Invoke();
 			_avatar.sprite = EmailData.AvatarSprite;
 			_senderName.text = EmailData.SenderName;
 			_subject.text = EmailData.Subject;
