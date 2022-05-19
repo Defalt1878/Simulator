@@ -7,35 +7,40 @@ namespace TaskbarAndTasks
 	public class TaskBar : MonoBehaviour
 	{
 		public static GameObject Desktop { get; private set; }
+		public static TaskBar GetInstance() => _instance;
+		private static TaskBar _instance;
+
 		private List<Task> _runningTasks;
 		private List<Task> _runningTasksOrder;
 
 		private void Awake()
 		{
+			_instance = this;
 			_runningTasks = new List<Task>();
 			_runningTasksOrder = new List<Task>();
 			Desktop = GameObject.Find("Desktop");
 		}
 
-		public void AddOrExpandTask(Task task)
+		public Task AddOrExpandTask(Task task)
 		{
-			var runningTask = _runningTasks
-				.FirstOrDefault(runningTask => runningTask.window.GetType() == task.window.GetType());
-			if (runningTask is null)
+			if (_runningTasks.Contains(task))
 			{
-				task = Instantiate(task, transform);
-				_runningTasks.Add(task);
-				_runningTasksOrder.Add(task);
-				task.Priority = _runningTasksOrder.Count - 1;
+				task.OnClick();
+				return task;
 			}
-			else
-			{
-				runningTask.OnClick();
-			}
+
+			task = Instantiate(task, transform);
+			_runningTasks.Add(task);
+			_runningTasksOrder.Add(task);
+			task.Priority = _runningTasksOrder.Count - 1;
+			return task;
 		}
 
 		public void EndTask(Task task)
 		{
+			if (!_runningTasks.Contains(task))
+				return;
+
 			_runningTasks.Remove(task);
 			_runningTasksOrder.Remove(task);
 			SetTasksOrder();
@@ -50,7 +55,8 @@ namespace TaskbarAndTasks
 
 			for (var i = 0; i < _runningTasksOrder.Count - 1; i++)
 				if (_runningTasksOrder[i] == task)
-					(_runningTasksOrder[i], _runningTasksOrder[i + 1]) = (_runningTasksOrder[i + 1], _runningTasksOrder[i]);
+					(_runningTasksOrder[i], _runningTasksOrder[i + 1]) =
+						(_runningTasksOrder[i + 1], _runningTasksOrder[i]);
 			SetTasksOrder();
 
 			return true;

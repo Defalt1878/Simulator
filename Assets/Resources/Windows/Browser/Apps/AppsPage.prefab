@@ -677,7 +677,7 @@ PrefabInstance:
     - target: {fileID: 7014133819542018575, guid: 9182fce508954df4a9569411870309ca, type: 3}
       propertyPath: downloadingAppShortcut
       value: 
-      objectReference: {fileID: 3716819654500918974, guid: 229d937af8efe4945852f340037bd8a1, type: 3}
+      objectReference: {fileID: 1658805819411849829, guid: debc78ee299ab494f96422e68b0aa3ec, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9182fce508954df4a9569411870309ca, type: 3}
 --- !u!224 &5043495726578109705 stripped
@@ -795,7 +795,7 @@ PrefabInstance:
     - target: {fileID: 7014133819542018575, guid: 9182fce508954df4a9569411870309ca, type: 3}
       propertyPath: downloadingAppShortcut
       value: 
-      objectReference: {fileID: 3716819654500918974, guid: 6e777283c4aa88f40a0698a2f42a6c99, type: 3}
+      objectReference: {fileID: 4214605630488075683, guid: 215f6ff6dbe03ec4eba5944eb989123a, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9182fce508954df4a9569411870309ca, type: 3}
 --- !u!224 &3641180814554147912 stripped
@@ -913,7 +913,7 @@ PrefabInstance:
     - target: {fileID: 7014133819542018575, guid: 9182fce508954df4a9569411870309ca, type: 3}
       propertyPath: downloadingAppShortcut
       value: 
-      objectReference: {fileID: 3716819654500918974, guid: 90d3191b9d7e5b341a86629f4455e52f, type: 3}
+      objectReference: {fileID: 5844781605083511972, guid: 72b096880b71d114498c30f080e45187, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9182fce508954df4a9569411870309ca, type: 3}
 --- !u!224 &2842025609481893420 stripped

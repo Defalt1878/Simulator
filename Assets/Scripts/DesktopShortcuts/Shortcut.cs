@@ -6,17 +6,21 @@ namespace DesktopShortcuts
 {
 	public class Shortcut : MonoBehaviour
 	{
-		[SerializeField]
-		private Task task;
+		[SerializeField] private Task task;
+		private Task _instTask;
 
 		public void OnClick()
 		{
 			if (task is null)
 				throw new NullReferenceException(nameof(task));
-			if (FindObjectOfType(typeof(TaskBar)) is not TaskBar taskBar)
-				throw new NullReferenceException("TaskBarNotFound");
-			
-			taskBar.AddOrExpandTask(task);
+
+			_instTask = TaskBar.GetInstance().AddOrExpandTask(task);
+		}
+
+		private void OnDestroy()
+		{
+			if (_instTask is not null)
+				TaskBar.GetInstance().EndTask(_instTask);
 		}
 	}
 }

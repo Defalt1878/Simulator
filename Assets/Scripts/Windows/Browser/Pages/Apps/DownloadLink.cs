@@ -21,7 +21,7 @@ namespace Windows.Browser.Pages.Apps
 		private void Update()
 		{
 			_downloadButton.Active = 
-				StaticData.GetInstance().AvailableToDownloadApps.Contains(_downloadingAppName) &&
+				StaticData.GetInstance().Apps.CanDownload(_downloadingAppName) &&
 				!_downloadButton.Downloading;
 		}
 	}

@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,6 +9,8 @@ namespace Windows.Cmd
 		private ConsoleOutput _consoleOutput;
 		private InputField _input;
 		private List<string> _lines;
+		private int _currentPosition;
+		private string _savedInput;
 
 		private void Awake()
 		{
@@ -22,26 +23,35 @@ namespace Windows.Cmd
 		{
 			if (!_input.isFocused)
 				return;
-			if (Input.GetKeyDown(KeyCode.UpArrow) && TryGetPreviousInput(_input.text, out var previous))
-				_input.text = previous;
+			if (Input.GetKeyDown(KeyCode.UpArrow))
+			{
+				_input.text = GetPreviousInput(_input.text);
+				_input.caretPosition = _input.text.Length;
+			}
+
 			if (Input.GetKeyDown(KeyCode.DownArrow))
+			{
 				_input.text = GetNextInput(_input.text);
+				_input.caretPosition = _input.text.Length;
+			}
 		}
 
-		private bool TryGetPreviousInput(string current, out string previous)
+		private string GetPreviousInput(string current)
 		{
-			previous = _lines
-				.TakeWhile(line => line != current)
-				.LastOrDefault();
-			return previous is not null;
+			if (_currentPosition == 0)
+				return current;
+			if (_currentPosition == _lines.Count)
+				_savedInput = current;
+			return _lines[--_currentPosition];
 		}
 
 		private string GetNextInput(string current)
 		{
-			return _lines
-				.SkipWhile(line => line != current)
-				.Skip(1)
-				.FirstOrDefault() ?? "";
+			if (_currentPosition + 1 > _lines.Count)
+				return current;
+			return ++_currentPosition == _lines.Count 
+				? _savedInput 
+				: _lines[_currentPosition];
 		}
 
 		public void SubmitCommand()
@@ -53,6 +63,7 @@ namespace Windows.Cmd
 			_lines.Add(_input.text);
 			_input.text = "";
 			_input.ActivateInputField();
+			_currentPosition = _lines.Count;
 		}
 	}
 }

@@ -12,6 +12,7 @@ namespace Windows.Browser.Pages.Apps
 		private Image _buttonImage;
 		private Button _button;
 		public bool Downloading { get; private set; }
+
 		public bool Active
 		{
 			get => _button.interactable;
@@ -45,8 +46,7 @@ namespace Windows.Browser.Pages.Apps
 				_buttonImage.fillAmount = i / 100f;
 			}
 
-			StaticData.GetInstance().Shortcuts.Add(DownloadingAppName);
-			StaticData.GetInstance().AvailableToDownloadApps.Remove(DownloadingAppName);
+			StaticData.GetInstance().Apps.Download(DownloadingAppName);
 			_button.colors = defaultColors;
 		}
 	}

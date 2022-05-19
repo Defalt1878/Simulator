@@ -16,15 +16,14 @@ namespace TaskbarAndTasks
 					_taskBar.TryMoveUpTask(this);
 			}
 		}
-		
+
 		public int Priority
 		{
 			get => _windowCanvas.sortingOrder;
 			set => _windowCanvas.sortingOrder = value;
 		}
 
-		[SerializeField]
-		public Window window;
+		[SerializeField] public Window window;
 		private bool _isMinimized;
 		private Canvas _windowCanvas;
 		private TaskBar _taskBar;
@@ -34,7 +33,7 @@ namespace TaskbarAndTasks
 			window = Instantiate(window, TaskBar.Desktop.transform);
 			window.CurrentTask = this;
 			_windowCanvas = window.gameObject.GetComponent<Canvas>();
-
+		
 			_taskBar = GetComponentInParent<TaskBar>();
 		}
 

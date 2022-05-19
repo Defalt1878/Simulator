@@ -1,5 +1,6 @@
 using System;
-using System.Collections.Generic;
+using Windows.Browser.Pages.Email.Data;
+using Random = UnityEngine.Random;
 
 namespace UserData
 {
@@ -19,17 +20,20 @@ namespace UserData
 
 		private StaticData()
 		{
-			Shortcuts = new List<string> {"Browser"};
-			AvailableToDownloadApps = new HashSet<string> {"Stats"};
-			ReceivedEmails = new List<string> {"First"};
-			CompletedEmails = new HashSet<string>();
-			Stats = new GameStats();
+			Apps = new AppsData(new[] {"Browser"}, new[] {"Stats"});
+			Emails = new EmailsData(StartEmail.Name);
+			Stats = new GameStats
+			{
+				Money = Random.Range(0, 30)
+			};
+			CurrentTime = new DateTime(2022, 7, 1, 0, 0, 0);
+			StartTime = CurrentTime;
 		}
 
-		public List<string> Shortcuts { get; private set; }
-		public HashSet<string> AvailableToDownloadApps { get; private set; }
-		public List<string> ReceivedEmails { get; private set; }
-		public HashSet<string> CompletedEmails { get; private set; }
+		public AppsData Apps { get; private set; }
+		public EmailsData Emails { get; private set; }
 		public GameStats Stats { get; private set; }
+		public DateTime CurrentTime { get; set; }
+		public DateTime StartTime { get; set; }
 	}
 }

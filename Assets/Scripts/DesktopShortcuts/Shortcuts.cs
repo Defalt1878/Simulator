@@ -10,7 +10,7 @@ namespace DesktopShortcuts
 
 		private void Update()
 		{
-			var shortcuts = StaticData.GetInstance().Shortcuts;
+			var shortcuts = StaticData.GetInstance().Apps.GetDownloaded();
 			if (shortcuts.Count == transform.childCount)
 				return;
 			if (shortcuts.Count < transform.childCount)

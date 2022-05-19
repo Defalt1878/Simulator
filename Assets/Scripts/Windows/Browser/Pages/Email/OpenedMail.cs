@@ -1,4 +1,5 @@
 using Windows.Browser.Pages.Email.Data;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,22 +20,22 @@ namespace Windows.Browser.Pages.Email
 		private EmailData _emailData;
 
 		private Image _avatar;
-		private Text _senderName;
-		private Text _subject;
+		private TextMeshProUGUI _senderName;
+		private TextMeshProUGUI _subject;
 		private Transform _content;
 
 		private void Awake()
 		{
 			var header = transform.Find("Header");
 			_avatar = header.Find("Avatar").GetComponent<Image>();
-			_senderName = header.Find("SenderName").GetComponent<Text>();
-			_subject = header.Find("Subject").GetComponent<Text>();
+			_senderName = header.Find("SenderName").GetComponent<TextMeshProUGUI>();
+			_subject = header.Find("Subject").GetComponent<TextMeshProUGUI>();
 			_content = transform.Find("Content");
 		}
 
 		private void UpdateEmail()
 		{
-			EmailData.OnOpen?.Invoke();
+			EmailData.OnOpen();
 			_avatar.sprite = EmailData.AvatarSprite;
 			_senderName.text = EmailData.SenderName;
 			_subject.text = EmailData.Subject;

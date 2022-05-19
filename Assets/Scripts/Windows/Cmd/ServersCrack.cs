@@ -17,20 +17,20 @@ namespace Windows.Cmd
 		private const float MinWaitTimeInSeconds = 15f;
 		private const float MaxWaitTimeInSeconds = 50f;
 		private const float RequestsDelay = 1.5f;
-		private const float AvailableServerChance = 0.08f;
+		private const float AvailableServerChance = 0.11f;
 
 		private const int MinPackageAmount = 5;
 		private const int MaxPackageAmount = 12;
 		private const int MinPackageLength = 1;
 		private const int MaxPackageLength = 3;
-		private const float PackageDelay = 1f;
+		private const float PackageDelay = 1.2f;
 
 		private const float CrackTimeInSeconds = 7;
 
 		public ConsoleOutput Console { get; set; }
 		private HashSet<string> _availableServers;
-		private int _requestsCount;
-		private bool _serverError;
+		private static int _requestsCount;
+		private static bool _serverError;
 
 		private bool _serverConnected;
 		private int _availablePackages;
@@ -40,7 +40,6 @@ namespace Windows.Cmd
 
 		private void Start()
 		{
-			_requestsCount = 0;
 			_availableServers = new HashSet<string>();
 			StartCoroutine(DecreaseRequests());
 		}

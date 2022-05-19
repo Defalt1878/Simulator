@@ -1,5 +1,6 @@
 using TaskbarAndTasks;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace Windows
 {
@@ -7,5 +8,7 @@ namespace Windows
 	{
 		public Task CurrentTask { get; set; }
 		public abstract string Name { get; }
+
+		public void OnClick(BaseEventData data) => CurrentTask.IsMinimized = false;
 	}
 }
