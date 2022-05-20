@@ -4,10 +4,10 @@ using UnityEngine.EventSystems;
 
 namespace Windows
 {
-	public abstract class Window : MonoBehaviour
+	public class Window : MonoBehaviour
 	{
 		public Task CurrentTask { get; set; }
-		public abstract string Name { get; }
+		[SerializeField] public string winName;
 
 		public void OnClick(BaseEventData data) => CurrentTask.IsMinimized = false;
 	}

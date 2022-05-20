@@ -6,7 +6,7 @@ namespace Windows.Cmd
 {
 	public class InputFieldHandler : MonoBehaviour
 	{
-		private ConsoleOutput _consoleOutput;
+		[SerializeField] private ConsoleOutput consoleOutput;
 		private InputField _input;
 		private List<string> _lines;
 		private int _currentPosition;
@@ -14,7 +14,6 @@ namespace Windows.Cmd
 
 		private void Awake()
 		{
-			_consoleOutput = GetComponentInParent<CmdWindow>().ConsoleOutput;
 			_input = GetComponent<InputField>();
 			_lines = new List<string>();
 		}
@@ -49,17 +48,17 @@ namespace Windows.Cmd
 		{
 			if (_currentPosition + 1 > _lines.Count)
 				return current;
-			return ++_currentPosition == _lines.Count 
-				? _savedInput 
+			return ++_currentPosition == _lines.Count
+				? _savedInput
 				: _lines[_currentPosition];
 		}
 
 		public void SubmitCommand()
 		{
-			if (!_consoleOutput.UserCanPrint)
+			if (!consoleOutput.UserCanPrint)
 				return;
 
-			_consoleOutput.HandleUserCommand(_input.text);
+			consoleOutput.HandleUserCommand(_input.text);
 			_lines.Add(_input.text);
 			_input.text = "";
 			_input.ActivateInputField();

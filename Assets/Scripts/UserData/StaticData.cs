@@ -26,6 +26,7 @@ namespace UserData
 			{
 				Money = Random.Range(0, 30)
 			};
+			CryptoData = new CryptoData();
 			CurrentTime = new DateTime(2022, 7, 1, 0, 0, 0);
 			StartTime = CurrentTime;
 		}
@@ -33,6 +34,7 @@ namespace UserData
 		public AppsData Apps { get; private set; }
 		public EmailsData Emails { get; private set; }
 		public GameStats Stats { get; private set; }
+		public CryptoData CryptoData { get; private set; }
 		public DateTime CurrentTime { get; set; }
 		public DateTime StartTime { get; set; }
 	}

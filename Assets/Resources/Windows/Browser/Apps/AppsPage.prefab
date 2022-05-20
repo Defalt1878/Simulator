@@ -138,9 +138,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2017398026540054916}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7825834fb6ff6fc408e2e240ea45a6e0, type: 3}
+  m_Script: {fileID: 11500000, guid: b677125f5df87e64bac63bf9de2aa525, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pageName: Apps Download
 --- !u!1 &2405333688453696835
 GameObject:
   m_ObjectHideFlags: 0

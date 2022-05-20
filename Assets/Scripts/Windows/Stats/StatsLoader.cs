@@ -26,7 +26,11 @@ namespace Windows.Stats
 				_lines[statName] = instLine;
 			}
 
-			_onChangeAction = (statName, newValue) => _lines[statName].Value = newValue;
+			_onChangeAction = (statName, newValue) =>
+			{
+				if (_lines.ContainsKey(statName))
+					_lines[statName].Value = newValue;
+			};
 			_stats.OnValueChanged += _onChangeAction;
 		}
 

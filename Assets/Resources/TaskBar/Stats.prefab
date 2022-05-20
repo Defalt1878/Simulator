@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: 1605950528840745727, guid: ee33ea7d6edd4db4581470acb920b204, type: 3}
       propertyPath: window
       value: 
-      objectReference: {fileID: 6443245917584290010, guid: 7d4fbc3941d6be249abc18388056b063, type: 3}
+      objectReference: {fileID: 1603583495110353484, guid: ca7b45c5f3306a64187cb6d19e366f36, type: 3}
     - target: {fileID: 1622205834829504889, guid: ee33ea7d6edd4db4581470acb920b204, type: 3}
       propertyPath: m_Type
       value: 0

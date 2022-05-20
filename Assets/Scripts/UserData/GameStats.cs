@@ -5,9 +5,9 @@ namespace UserData
 	[Serializable]
 	public class GameStats
 	{
-		private int _money;
+		private float _money;
 
-		public int Money
+		public float Money
 		{
 			get => _money;
 			set
@@ -19,7 +19,7 @@ namespace UserData
 			}
 		}
 
-		public string MoneyStr => $"{Money} $";
+		public string MoneyStr => $"{Money:0.00} $";
 
 		[field: NonSerialized] public event Action<string, string> OnValueChanged;
 	}

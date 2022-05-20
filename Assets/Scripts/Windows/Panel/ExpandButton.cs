@@ -17,16 +17,12 @@ namespace Windows.Panel
 			expandedSprite ??= defaultSprite;
 		}
 
-		public void OnClick()
+		private void OnClick()
 		{
 			_isExpanded = !_isExpanded;
 			_image.sprite = _isExpanded
 				? expandedSprite
 				: defaultSprite;
-		}
-
-		private void Expand()
-		{
 			//TODO Реализовать функцию открытия на полный экран
 		}
 	}

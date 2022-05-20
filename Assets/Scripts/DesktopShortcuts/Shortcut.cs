@@ -14,7 +14,7 @@ namespace DesktopShortcuts
 			if (task is null)
 				throw new NullReferenceException(nameof(task));
 
-			_instTask = TaskBar.GetInstance().AddOrExpandTask(task);
+			_instTask = TaskBar.GetInstance().AddOrExpandTask(task, _instTask);
 		}
 
 		private void OnDestroy()

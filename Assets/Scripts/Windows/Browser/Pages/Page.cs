@@ -2,8 +2,8 @@ using UnityEngine;
 
 namespace Windows.Browser.Pages
 {
-    public abstract class Page : MonoBehaviour
-    {
-        public abstract string Name { get; }
-    }
+	public class Page : MonoBehaviour
+	{
+		[SerializeField] public string pageName;
+	}
 }

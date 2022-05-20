@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 564549294928593789}
   - component: {fileID: 8605581235692256127}
   - component: {fileID: 3872971541413925817}
-  - component: {fileID: 7963252277927303388}
   m_Layer: 5
   m_Name: Name
   m_TagString: Untagged
@@ -136,18 +135,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &7963252277927303388
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2507486034753789494}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a178a80da4b73264e977693cb7d15474, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &7362067420197889853
 GameObject:
   m_ObjectHideFlags: 0
@@ -157,7 +144,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7362067420197889854}
-  - component: {fileID: 7362067420197889855}
+  - component: {fileID: 1292253385653013227}
+  - component: {fileID: 1757352620931872735}
   - component: {fileID: 308391127215114915}
   m_Layer: 5
   m_Name: Panel
@@ -191,7 +179,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 50}
   m_Pivot: {x: 0.5, y: 1}
---- !u!114 &7362067420197889855
+--- !u!114 &1292253385653013227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7362067420197889853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7c11795a0f20cd418096d4b1d9b51ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1757352620931872735
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -220,7 +220,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 7362067420197889855}
+        - m_Target: {fileID: 1757352620931872735}
           m_TargetAssemblyTypeName: Windows.Panel.DragHandler, Assembly-CSharp
           m_MethodName: OnDrag
           m_Mode: 0
@@ -236,7 +236,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 7362067420197889855}
+        - m_Target: {fileID: 1757352620931872735}
           m_TargetAssemblyTypeName: Windows.Panel.DragHandler, Assembly-CSharp
           m_MethodName: OnDragStarted
           m_Mode: 0
@@ -336,7 +336,6 @@ GameObject:
   - component: {fileID: 7362067421011964062}
   - component: {fileID: 7362067421011964061}
   - component: {fileID: 7362067421011964060}
-  - component: {fileID: 7362067421011964063}
   m_Layer: 5
   m_Name: Close
   m_TagString: Untagged
@@ -446,9 +445,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7362067421011964063}
-        m_TargetAssemblyTypeName: Windows.Panel.CloseButton, Assembly-CSharp
-        m_MethodName: OnClick
+      - m_Target: {fileID: 1292253385653013227}
+        m_TargetAssemblyTypeName: Windows.Panel.WindowPanel, Assembly-CSharp
+        m_MethodName: Close
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -458,18 +457,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &7362067421011964063
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7362067421011964058}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76157a5bc9c9c2b46815f7c7ac2471ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &7362067421115140164
 GameObject:
   m_ObjectHideFlags: 0
@@ -630,7 +617,6 @@ GameObject:
   - component: {fileID: 7362067421976182944}
   - component: {fileID: 7362067421976182975}
   - component: {fileID: 7362067421976182974}
-  - component: {fileID: 7362067421976182973}
   m_Layer: 5
   m_Name: Minimize
   m_TagString: Untagged
@@ -740,9 +726,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7362067421976182973}
-        m_TargetAssemblyTypeName: Windows.Panel.MinimizeButton, Assembly-CSharp
-        m_MethodName: OnClick
+      - m_Target: {fileID: 1292253385653013227}
+        m_TargetAssemblyTypeName: Windows.Panel.WindowPanel, Assembly-CSharp
+        m_MethodName: Minimize
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -752,15 +738,3 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &7362067421976182973
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7362067421976182971}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77d975398c441ba458af0641712f1c8d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

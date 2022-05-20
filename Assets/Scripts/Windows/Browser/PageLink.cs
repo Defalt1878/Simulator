@@ -3,17 +3,11 @@ using UnityEngine;
 
 namespace Windows.Browser
 {
-    public class PageLink : MonoBehaviour
-    {
-        [SerializeField]
-        private Page page;
-        private SitePanel _sitePanel;
-        
-        private void Awake()
-        {
-            _sitePanel = GetComponentInParent<BrowserWindow>().sitePanel;
-        }
+	public class PageLink : MonoBehaviour
+	{
+		[SerializeField] private Page page;
+		[SerializeField] private SitePanel sitePanel;
 
-        public void OnClick() => _sitePanel.OpenTab(page);
-    }
+		public void OnClick() => sitePanel.OpenTab(page);
+	}
 }

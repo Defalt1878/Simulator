@@ -499,10 +499,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2017398026540054916}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c55c184859f29445946ec7b1b1b53f6, type: 3}
+  m_Script: {fileID: 11500000, guid: b677125f5df87e64bac63bf9de2aa525, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  openedMail: {fileID: 7896220619265998081}
+  pageName: Email
 --- !u!1 &2375145683476980008
 GameObject:
   m_ObjectHideFlags: 0
@@ -1707,3 +1707,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   emailPrefab: {fileID: 5786396773239077835, guid: ac3cc33394736704d92bd94a307fbf45, type: 3}
+  openedMail: {fileID: 7896220619265998081}

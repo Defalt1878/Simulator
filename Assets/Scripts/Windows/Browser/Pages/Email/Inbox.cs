@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Windows.Browser.Pages.Email.Data;
 using UnityEngine;
@@ -9,7 +8,7 @@ namespace Windows.Browser.Pages.Email
 	public class Inbox : MonoBehaviour
 	{
 		[SerializeField] private Email emailPrefab;
-		private OpenedMail _openedMail;
+		[SerializeField] private OpenedMail openedMail;
 		private List<string> _receivedEmails;
 
 		private static readonly Dictionary<string, EmailData> EmailsData = new()
@@ -21,7 +20,6 @@ namespace Windows.Browser.Pages.Email
 
 		private void Awake()
 		{
-			_openedMail = transform.GetComponentInParent<EmailPage>().openedMail;
 			_receivedEmails = StaticData.GetInstance().Emails.GetReceived();
 		}
 
@@ -44,7 +42,7 @@ namespace Windows.Browser.Pages.Email
 		{
 			var email = Instantiate(emailPrefab, transform);
 			email.EmailData = EmailsData[emailName];
-			email.OpenedMail = _openedMail;
+			email.OpenedMail = openedMail;
 		}
 	}
 }

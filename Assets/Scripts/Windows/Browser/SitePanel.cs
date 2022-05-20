@@ -6,8 +6,8 @@ namespace Windows.Browser
 {
 	public class SitePanel : MonoBehaviour
 	{
+		[SerializeField] private Transform window;
 		private Page _currentPage;
-
 		private Text _text;
 
 		private void Awake()
@@ -18,15 +18,15 @@ namespace Windows.Browser
 
 		public void OpenTab(Page page)
 		{
-			_currentPage = Instantiate(page, GetComponentInParent<BrowserWindow>().transform);
+			_currentPage = Instantiate(page, window);
 			gameObject.SetActive(true);
-			_text.text = page.Name;
+			_text.text = page.pageName;
 		}
 
 		public void CloseTab()
 		{
 			Destroy(_currentPage.gameObject);
-			gameObject.SetActive(false);;
+			gameObject.SetActive(false);
 		}
 	}
 }

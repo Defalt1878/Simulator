@@ -21,19 +21,19 @@ namespace TaskbarAndTasks
 			Desktop = GameObject.Find("Desktop");
 		}
 
-		public Task AddOrExpandTask(Task task)
+		public Task AddOrExpandTask(Task taskPrefab, Task instTask)
 		{
-			if (_runningTasks.Contains(task))
+			if (_runningTasks.Contains(instTask))
 			{
-				task.OnClick();
-				return task;
+				instTask.OnClick();
+				return instTask;
 			}
 
-			task = Instantiate(task, transform);
-			_runningTasks.Add(task);
-			_runningTasksOrder.Add(task);
-			task.Priority = _runningTasksOrder.Count - 1;
-			return task;
+			instTask = Instantiate(taskPrefab, transform);
+			_runningTasks.Add(instTask);
+			_runningTasksOrder.Add(instTask);
+			instTask.Priority = _runningTasksOrder.Count - 1;
+			return instTask;
 		}
 
 		public void EndTask(Task task)
