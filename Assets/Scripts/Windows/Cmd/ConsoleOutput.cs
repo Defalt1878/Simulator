@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+using UserData;
 
 namespace Windows.Cmd
 {
@@ -106,6 +107,20 @@ namespace Windows.Cmd
 					if (parts.Length != 2)
 						goto default;
 					_serversCrack.TryCrack(parts[1]);
+					break;
+				}
+
+				case "money":
+				{
+					if (parts.Length != 2)
+						goto default;
+					if (!int.TryParse(parts[1], out var amount))
+					{
+						WrongDataError(parts[1]);
+						return;
+					}
+
+					StaticData.GetInstance().Stats.Money += amount;
 					break;
 				}
 

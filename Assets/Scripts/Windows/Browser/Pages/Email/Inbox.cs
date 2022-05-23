@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Windows.Browser.Pages.Email.Data;
 using UnityEngine;
@@ -11,11 +12,24 @@ namespace Windows.Browser.Pages.Email
 		[SerializeField] private OpenedMail openedMail;
 		private List<string> _receivedEmails;
 
-		private static readonly Dictionary<string, EmailData> EmailsData = new()
+		public static readonly Dictionary<string, Func<string, EmailData>> EmailsData = new()
 		{
-			{StartEmail.Name, new StartEmail()},
-			{CmdEmail.Name, new CmdEmail()},
-			{MinerEmail.Name, new MinerEmail()}
+			{StartEmail.Name, _ => new StartEmail()},
+			{CmdEmail.Name, _ => new CmdEmail()},
+			{MinerEmail.Name, _ => new MinerEmail()},
+			{
+				DarkMarketEmail.Name, s =>
+				{
+					if (s is null)
+						return new DarkMarketEmail();
+					var parts = s.Split(' ');
+					return new DarkMarketEmail
+					{
+						HashRate = float.Parse(parts[1]),
+						Server = parts[2]
+					};
+				}
+			}
 		};
 
 		private void Awake()
@@ -38,10 +52,11 @@ namespace Windows.Browser.Pages.Email
 				InstantiateEmail(_receivedEmails[i]);
 		}
 
-		private void InstantiateEmail(string emailName)
+		private void InstantiateEmail(string emailData)
 		{
+			var parts = emailData.Split(' ');
 			var email = Instantiate(emailPrefab, transform);
-			email.EmailData = EmailsData[emailName];
+			email.EmailData = EmailsData[parts[0]].Invoke(emailData);
 			email.OpenedMail = openedMail;
 		}
 	}

@@ -8,11 +8,8 @@ namespace Windows.Browser.Pages.Email.Data
 		public override string SenderName => "Unknown";
 		public override string Subject => "Bitcoins";
 
-		public override void OnOpen()
+		public override void OnLoad()
 		{
-			if (Opened)
-				return;
-			Opened = true;
 			var instance = StaticData.GetInstance();
 			if (instance.Emails.IsCompleted(Name))
 				return;
@@ -22,6 +19,11 @@ namespace Windows.Browser.Pages.Email.Data
 				OnComplete();
 			};
 			instance.Stats.OnValueChanged += CheckComplete;
+		}
+
+		public override void OnOpen()
+		{
+			var instance = StaticData.GetInstance();
 			if (instance.Emails.IsOpened(Name))
 				return;
 			instance.Emails.MarkOpen(Name);

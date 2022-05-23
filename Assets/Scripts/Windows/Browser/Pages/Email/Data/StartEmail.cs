@@ -1,5 +1,5 @@
-using System;
-using TaskbarAndTasks;
+using Taskbar;
+using UnityEngine;
 using UserData;
 
 namespace Windows.Browser.Pages.Email.Data
@@ -10,11 +10,8 @@ namespace Windows.Browser.Pages.Email.Data
 		public override string SenderName => "Зубенко М. П.";
 		public override string Subject => "Ну как там с деньгами?";
 
-		public override void OnOpen()
+		public override void OnLoad()
 		{
-			if (Opened)
-				return;
-			Opened = true;
 			var instance = StaticData.GetInstance();
 			if (instance.Emails.IsCompleted(Name))
 				return;
@@ -24,13 +21,20 @@ namespace Windows.Browser.Pages.Email.Data
 					OnComplete();
 			};
 			instance.Stats.OnValueChanged += CheckComplete;
-			var clock = TaskBar.Desktop.GetComponentInChildren<Clock>();
-			clock.OnStop += () =>
+			var clock = GameObject.Find("Desktop").GetComponentInChildren<Clock>();
+			clock.OnHourLast += (currentTime) =>
 			{
 				if (instance.Emails.IsCompleted(Name))
 					return;
-				GameFailed();
+				var timeSpan = currentTime - instance.StartTime;
+				if (timeSpan.Hours >= 24)
+					GameFailed();
 			};
+		}
+
+		public override void OnOpen()
+		{
+			var instance = StaticData.GetInstance();
 			if (instance.Emails.IsOpened(Name))
 				return;
 			instance.Emails.MarkOpen(Name);

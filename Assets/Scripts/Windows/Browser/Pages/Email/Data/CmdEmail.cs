@@ -9,21 +9,8 @@ namespace Windows.Browser.Pages.Email.Data
 		public override string SenderName => "Unknown";
 		public override string Subject => "CMD";
 
-		private void OnComplete()
+		public override void OnLoad()
 		{
-			var instance = StaticData.GetInstance();
-			if (instance.Emails.IsCompleted(Name))
-				return;
-			instance.Emails.Complete(Name);
-			instance.Stats.OnValueChanged -= CheckComplete;
-			instance.Emails.NewEmail(MinerEmail.Name);
-		}
-
-		public override void OnOpen()
-		{
-			if (Opened)
-				return;
-			Opened = true;
 			var instance = StaticData.GetInstance();
 			if (instance.Emails.IsCompleted(Name))
 				return;
@@ -33,11 +20,25 @@ namespace Windows.Browser.Pages.Email.Data
 					OnComplete();
 			};
 			instance.Stats.OnValueChanged += CheckComplete;
+		}
+
+		public override void OnOpen()
+		{
+			var instance = StaticData.GetInstance();
 			if (instance.Emails.IsOpened(Name))
 				return;
 			instance.Emails.MarkOpen(Name);
 			instance.Apps.AddToDownloads("CMD");
-			
+		}
+
+		private void OnComplete()
+		{
+			var instance = StaticData.GetInstance();
+			if (instance.Emails.IsCompleted(Name))
+				return;
+			instance.Emails.Complete(Name);
+			instance.Stats.OnValueChanged -= CheckComplete;
+			instance.Emails.NewEmail(MinerEmail.Name);
 		}
 
 		private protected override string EmailFolder => "Cmd";

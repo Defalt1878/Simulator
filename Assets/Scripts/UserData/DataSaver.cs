@@ -41,7 +41,7 @@ namespace UserData
 				File.Delete(DataSavePath);
 			var instance = typeof(StaticData).GetField("_instance", BindingFlags.NonPublic | BindingFlags.Static);
 			instance?.SetValue(null, null);
-			
+
 			StaticData.GetInstance();
 		}
 	}

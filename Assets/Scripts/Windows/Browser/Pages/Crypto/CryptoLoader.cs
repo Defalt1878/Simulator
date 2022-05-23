@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using UnityEngine;
 using UserData;
 
@@ -37,13 +38,16 @@ namespace Windows.Browser.Pages.Crypto
 			_lines = new Dictionary<string, CryptoLine>();
 			_crypto = StaticData.GetInstance().CryptoData;
 			var cryptoType = _crypto.GetType();
-			foreach (var property in cryptoType.GetProperties().Where(prop => prop.Name[^4..] != "Rate"))
+			foreach (var property in cryptoType.GetProperties())
 			{
+				var currencyAtt = property.GetCustomAttribute<CurrencyAttribute>();
+				if (currencyAtt is null)
+					continue;
 				var instLine = Instantiate(linePrefab, transform);
 				var propName = property.Name;
 				instLine.Name = propName;
 				instLine.Value = (float) property.GetValue(_crypto);
-				instLine.ExchangeRate = (float) cryptoType.GetProperty($"{propName}ExchangeRate")?.GetValue(_crypto)!;
+				instLine.ExchangeRate = currencyAtt.ExchangeRate;
 				instLine.State = _state;
 				_lines[propName] = instLine;
 			}

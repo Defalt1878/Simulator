@@ -10,6 +10,7 @@ namespace UserData
 		private float _tether;
 		private float _dogecoin;
 
+		[Currency(nameof(BitcoinExchangeRate))]
 		public float Bitcoin
 		{
 			get => _bitcoin;
@@ -22,6 +23,7 @@ namespace UserData
 			}
 		}
 
+		[Currency(nameof(EthereumExchangeRate))]
 		public float Ethereum
 		{
 			get => _ethereum;
@@ -34,6 +36,7 @@ namespace UserData
 			}
 		}
 
+		[Currency(nameof(TetherExchangeRate))]
 		public float Tether
 		{
 			get => _tether;
@@ -46,6 +49,7 @@ namespace UserData
 			}
 		}
 
+		[Currency(nameof(DogecoinExchangeRate))]
 		public float Dogecoin
 		{
 			get => _dogecoin;
@@ -64,5 +68,25 @@ namespace UserData
 		public float DogecoinExchangeRate => 0.087f;
 
 		[field: NonSerialized] public event Action<string, float> OnValueChanged;
+	}
+
+	public class CurrencyAttribute : Attribute
+	{
+		public float ExchangeRate
+		{
+			get
+			{
+				var cryptoData = StaticData.GetInstance().CryptoData;
+				var rateProperty = cryptoData.GetType().GetProperty(_exchangeRateName);
+				return (float) rateProperty?.GetValue(cryptoData)!;
+			}
+		}
+
+		private readonly string _exchangeRateName;
+
+		public CurrencyAttribute(string exchangeRateName)
+		{
+			_exchangeRateName = exchangeRateName;
+		}
 	}
 }

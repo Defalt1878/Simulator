@@ -17,7 +17,7 @@ namespace Windows.Cmd
 		private const float MinWaitTimeInSeconds = 15f;
 		private const float MaxWaitTimeInSeconds = 50f;
 		private const float RequestsDelay = 1.5f;
-		private const float AvailableServerChance = 0.11f;
+		private const float AvailableServerChance = 0.12f;
 
 		private const int MinPackageAmount = 5;
 		private const int MaxPackageAmount = 12;
@@ -184,6 +184,7 @@ namespace Windows.Cmd
 				if (_receivedPackages == _availablePackages)
 				{
 					Console.Print("No more available packages!", CmdColors.Error);
+					Console.UserCanPrint = true;
 					yield break;
 				}
 
