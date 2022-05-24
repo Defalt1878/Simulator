@@ -10,7 +10,7 @@ namespace Windows.Miner
 		{
 			var points = field
 				.Cast<GameCell>()
-				.Where(cell => cell.IsTarget)
+				.Where(cell => cell.Type == CellType.Target)
 				.Select(cell => cell.Position)
 				.Concat(new[] {start, exit})
 				.ToHashSet();
@@ -86,7 +86,7 @@ namespace Windows.Miner
 			}
 		}
 
-		private static IEnumerable<Vector2Int> GetNeighbours4(Vector2Int current, int fieldSize)
+		public static IEnumerable<Vector2Int> GetNeighbours4(Vector2Int current, int fieldSize)
 		{
 			for (var dx = -1; dx <= 1; dx++)
 			for (var dy = -1; dy <= 1; dy++)

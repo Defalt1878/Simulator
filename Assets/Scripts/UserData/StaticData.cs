@@ -1,4 +1,3 @@
-
 using System;
 using Windows.Browser.Pages.Email.Data;
 using Random = UnityEngine.Random;

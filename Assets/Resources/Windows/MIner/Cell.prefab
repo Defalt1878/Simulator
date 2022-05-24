@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 7644666096464824009}
   - component: {fileID: 7397259406043182530}
   - component: {fileID: 379062112164481302}
-  - component: {fileID: 6605106000334726458}
   m_Layer: 5
   m_Name: Cell
   m_TagString: Untagged
@@ -90,51 +89,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03a22108244fa2a4a9f14162ed38b568, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  image: {fileID: 7397259406043182530}
+  cellImage: {fileID: 7397259406043182530}
   defaultSprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  startSprite: {fileID: 21300000, guid: 38bb2cd75d8102241b7adda1b0f2da46, type: 3}
+  exitSprite: {fileID: 21300000, guid: d128396607d00b647aa6d0b7f33e48c9, type: 3}
   targetSprite: {fileID: 21300000, guid: 48a1e6fd77e5894438872349ddc3e8a1, type: 3}
---- !u!114 &6605106000334726458
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5424353411542645416}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 2
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 379062112164481302}
-          m_TargetAssemblyTypeName: Windows.Miner.GameCell, Assembly-CSharp
-          m_MethodName: OnPointerDown
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 379062112164481302}
-          m_TargetAssemblyTypeName: Windows.Miner.GameCell, Assembly-CSharp
-          m_MethodName: OnPointerEnter
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
