@@ -24,9 +24,9 @@ namespace Windows.Browser.Pages.Email.Data
 		public override void OnOpen()
 		{
 			var instance = StaticData.GetInstance();
-			if (instance.Emails.IsOpened(Name))
+			if (instance.Emails.IsRead(Name))
 				return;
-			instance.Emails.MarkOpen(Name);
+			instance.Emails.MarkAsRead(Name);
 			instance.Apps.AddToDownloads("Miner");
 		}
 		

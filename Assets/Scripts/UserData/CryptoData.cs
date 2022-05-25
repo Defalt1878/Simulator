@@ -62,12 +62,65 @@ namespace UserData
 			}
 		}
 
-		public float BitcoinExchangeRate => 30296.90f;
-		public float EthereumExchangeRate => 2040.40f;
-		public float TetherExchangeRate => 1.00f;
-		public float DogecoinExchangeRate => 0.087f;
+		private float _bitcoinExchangeRate = 30296.90f;
+		private float _ethereumExchangeRate = 2040.40f;
+		private float _tetherExchangeRate = 1.00f;
+		private float _dogecoinExchangeRate = 0.087f;
+
+		[ExchangeRate(26000, 36000)]
+		public float BitcoinExchangeRate
+		{
+			get => _bitcoinExchangeRate;
+			set
+			{
+				if (value < 0)
+					throw new ArgumentException();
+				_bitcoinExchangeRate = value;
+				OnRateChanged?.Invoke(nameof(Bitcoin), BitcoinExchangeRate);
+			}
+		}
+		
+		[ExchangeRate(1800, 2400)]
+		public float EthereumExchangeRate
+		{
+			get => _ethereumExchangeRate;
+			set
+			{
+				if (value < 0)
+					throw new ArgumentException();
+				_ethereumExchangeRate = value;
+				OnRateChanged?.Invoke(nameof(Ethereum), EthereumExchangeRate);
+			}
+		}
+		
+		[ExchangeRate(0.6f, 1.4f)]
+		public float TetherExchangeRate
+		{
+			get => _tetherExchangeRate;
+			set
+			{
+				if (value < 0)
+					throw new ArgumentException();
+				_tetherExchangeRate = value;
+				OnRateChanged?.Invoke(nameof(Tether), TetherExchangeRate);
+			}
+		}
+		
+		[ExchangeRate(0.004f, 0.02f)]
+		public float DogecoinExchangeRate
+		{
+			get => _dogecoinExchangeRate;
+			set
+			{
+				if (value < 0)
+					throw new ArgumentException();
+				_dogecoinExchangeRate = value;
+				OnRateChanged?.Invoke(nameof(Dogecoin), DogecoinExchangeRate);
+			}
+		}
 
 		[field: NonSerialized] public event Action<string, float> OnValueChanged;
+		[field: NonSerialized] public event Action<string, float> OnRateChanged;
 	}
 
 	public class CurrencyAttribute : Attribute
@@ -87,6 +140,18 @@ namespace UserData
 		public CurrencyAttribute(string exchangeRateName)
 		{
 			_exchangeRateName = exchangeRateName;
+		}
+	}
+
+	public class ExchangeRateAttribute : Attribute
+	{
+		public float Min { get; }
+		public float Max { get; }
+
+		public ExchangeRateAttribute(float minRate, float maxRate)
+		{
+			Min = minRate;
+			Max = maxRate;
 		}
 	}
 }

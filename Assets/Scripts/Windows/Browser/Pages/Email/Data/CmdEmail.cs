@@ -3,6 +3,7 @@ using UserData;
 
 namespace Windows.Browser.Pages.Email.Data
 {
+	[Serializable]
 	public class CmdEmail : EmailData
 	{
 		public static string Name => "Cmd";
@@ -25,9 +26,9 @@ namespace Windows.Browser.Pages.Email.Data
 		public override void OnOpen()
 		{
 			var instance = StaticData.GetInstance();
-			if (instance.Emails.IsOpened(Name))
+			if (instance.Emails.IsRead(Name))
 				return;
-			instance.Emails.MarkOpen(Name);
+			instance.Emails.MarkAsRead(Name);
 			instance.Apps.AddToDownloads("CMD");
 		}
 

@@ -9,11 +9,11 @@ namespace Windows.Miner
 		[SerializeField] private TMP_InputField input;
 		[SerializeField] private GameObject connectionGame;
 		[SerializeField] private GameField game;
-
+		private string _server;
 		public void TryConnect()
 		{
-			var server = input.text;
-			if (!StaticData.GetInstance().MiningData.ServersHashRates.ContainsKey(server))
+			_server = input.text;
+			if (!StaticData.GetInstance().MiningData.ServersHashRates.ContainsKey(_server))
 			{
 				Debug.LogWarning("Server not found!");
 				return;
@@ -30,6 +30,11 @@ namespace Windows.Miner
 		{
 			connectionGame.SetActive(false);
 			gameObject.SetActive(true);
+			var miningData = StaticData.GetInstance().MiningData;
+			var hashRate = miningData.ServersHashRates[_server];
+			miningData.ServersHashRates.Remove(_server);
+			miningData.UserHashRate += hashRate;
+			miningData.ConnectedServersCount++;
 		}
 	}
 }

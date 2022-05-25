@@ -7,7 +7,7 @@ namespace UserData
 	[Serializable]
 	public class MiningData
 	{
-		public const float BtcHashRate = 700000;
+		public float BtcHashRate => 2000000;
 		public int ConnectedServersCount { get; set; }
 		public float UserHashRate { get; set; }
 

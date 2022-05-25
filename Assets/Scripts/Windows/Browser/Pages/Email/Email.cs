@@ -2,11 +2,13 @@ using Windows.Browser.Pages.Email.Data;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UserData;
 
 namespace Windows.Browser.Pages.Email
 {
 	public class Email : MonoBehaviour
 	{
+		[SerializeField] private GameObject newEmailNotification;
 		public EmailData EmailData
 		{
 			get => _emailData;
@@ -36,6 +38,7 @@ namespace Windows.Browser.Pages.Email
 			_avatar.sprite = EmailData.AvatarSprite;
 			_senderName.text = EmailData.SenderName;
 			_subject.text = EmailData.Subject;
+			// newEmailNotification.SetActive(StaticData.GetInstance().Emails.IsRead(EmailData.));
 		}
 
 		public void OnClick()

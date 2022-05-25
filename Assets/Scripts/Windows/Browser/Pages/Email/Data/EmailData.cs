@@ -4,7 +4,8 @@ using UnityEngine;
 
 namespace Windows.Browser.Pages.Email.Data
 {
-	public abstract class EmailData : ICloneable
+	[Serializable]
+	public abstract class EmailData
 	{
 		public abstract string SenderName { get; }
 		public abstract string Subject { get; }
@@ -19,12 +20,8 @@ namespace Windows.Browser.Pages.Email.Data
 		public Transform Content => _content ??=
 			Resources.Load<Transform>(Path.Combine("Emails", EmailFolder, "Content"));
 
-		private Sprite _avatarSprite;
-		private Transform _content;
+		[NonSerialized] private Sprite _avatarSprite;
+		[NonSerialized] private Transform _content;
 		private protected Action<string, string> CheckComplete;
-		public object Clone()
-		{
-			throw new NotImplementedException();
-		}
 	}
 }

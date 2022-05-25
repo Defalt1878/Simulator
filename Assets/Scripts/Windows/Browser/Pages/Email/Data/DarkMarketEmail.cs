@@ -5,6 +5,8 @@ namespace Windows.Browser.Pages.Email.Data
 	public class DarkMarketEmail : EmailData
 	{
 		public static string Name => "DarkMarket";
+
+		private string FullName => $"{Name} {HashRate} {Server}";
 		public override string SenderName => "DarkMarket";
 		public override string Subject => "New purchase";
 		
@@ -18,9 +20,9 @@ namespace Windows.Browser.Pages.Email.Data
 		public override void OnOpen()
 		{
 			var instance = StaticData.GetInstance();
-			if (instance.Emails.IsOpened(Name))
+			if (instance.Emails.IsRead(FullName))
 				return;
-			instance.Emails.MarkOpen(Name);
+			instance.Emails.MarkAsRead(FullName);
 			instance.MiningData.ServersHashRates[Server] = HashRate;
 		}
 
