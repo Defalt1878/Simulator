@@ -1,7 +1,5 @@
-using System.Linq;
 using Windows.Browser.Pages.Crypto;
 using Windows.Browser.Pages.DarkMarket;
-using Windows.Browser.Pages.Email;
 using Taskbar;
 using UnityEngine;
 using UserData;
@@ -21,12 +19,9 @@ namespace Desktop
 
 		private void Update()
 		{
-			var received = StaticData.GetInstance().Emails.GetReceived();
+			var received = StaticData.GetInstance().Emails;
 			for (var i = _receivedEmailsCount; i < received.Count; i++)
-			{
-				var emailName = received[i].Split(' ').First();
-				Inbox.EmailsData[emailName].Invoke(null).OnLoad();
-			}
+				received[i].OnLoad();
 
 			_receivedEmailsCount = received.Count;
 		}

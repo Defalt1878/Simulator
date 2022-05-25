@@ -8,14 +8,13 @@ namespace Windows.Browser.Pages.Email.Data
 	[Serializable]
 	public class StartEmail : EmailData
 	{
-		public static string Name => "Start";
 		public override string SenderName => "Зубенко М. П.";
 		public override string Subject => "Ну как там с деньгами?";
 
 		public override void OnLoad()
 		{
 			var instance = StaticData.GetInstance();
-			if (instance.Emails.IsCompleted(Name))
+			if (IsCompleted)
 				return;
 			CheckComplete = (_, _) =>
 			{
@@ -26,7 +25,7 @@ namespace Windows.Browser.Pages.Email.Data
 			var clock = GameObject.Find("Desktop").GetComponentInChildren<Clock>();
 			clock.OnHourLast += (currentTime) =>
 			{
-				if (instance.Emails.IsCompleted(Name))
+				if (IsCompleted)
 					return;
 				var timeSpan = currentTime - instance.StartTime;
 				if (timeSpan.Hours >= 24)
@@ -37,19 +36,19 @@ namespace Windows.Browser.Pages.Email.Data
 		public override void OnOpen()
 		{
 			var instance = StaticData.GetInstance();
-			if (instance.Emails.IsRead(Name))
+			if (IsRead)
 				return;
-			instance.Emails.MarkAsRead(Name);
+			IsRead = true;
 			instance.StartTime = instance.CurrentTime;
-			instance.Emails.NewEmail(CmdEmail.Name);
+			instance.Emails.Add(new CmdEmail());
 		}
 
 		private void OnComplete()
 		{
 			var instance = StaticData.GetInstance();
-			if (instance.Emails.IsCompleted(Name))
+			if (IsCompleted)
 				return;
-			instance.Emails.Complete(Name);
+			IsCompleted = true;
 			instance.Stats.OnValueChanged -= CheckComplete;
 			//TODO: Дописать конец игры
 		}

@@ -6,14 +6,13 @@ namespace Windows.Browser.Pages.Email.Data
 	[Serializable]
 	public class CmdEmail : EmailData
 	{
-		public static string Name => "Cmd";
 		public override string SenderName => "Unknown";
 		public override string Subject => "CMD";
 
 		public override void OnLoad()
 		{
 			var instance = StaticData.GetInstance();
-			if (instance.Emails.IsCompleted(Name))
+			if (IsCompleted)
 				return;
 			CheckComplete = (_, _) =>
 			{
@@ -26,20 +25,20 @@ namespace Windows.Browser.Pages.Email.Data
 		public override void OnOpen()
 		{
 			var instance = StaticData.GetInstance();
-			if (instance.Emails.IsRead(Name))
+			if (IsRead)
 				return;
-			instance.Emails.MarkAsRead(Name);
+			IsRead = true;
 			instance.Apps.AddToDownloads("CMD");
 		}
 
 		private void OnComplete()
 		{
 			var instance = StaticData.GetInstance();
-			if (instance.Emails.IsCompleted(Name))
+			if (IsCompleted)
 				return;
-			instance.Emails.Complete(Name);
+			IsCompleted = true;
 			instance.Stats.OnValueChanged -= CheckComplete;
-			instance.Emails.NewEmail(MinerEmail.Name);
+			instance.Emails.Add(new MinerEmail());
 		}
 
 		private protected override string EmailFolder => "Cmd";

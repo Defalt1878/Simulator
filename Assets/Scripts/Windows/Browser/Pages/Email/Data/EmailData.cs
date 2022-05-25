@@ -12,7 +12,6 @@ namespace Windows.Browser.Pages.Email.Data
 
 		public abstract void OnLoad();
 		public abstract void OnOpen();
-		private protected abstract string EmailFolder { get; }
 
 		public Sprite AvatarSprite => _avatarSprite ??=
 			Resources.Load<SpriteRenderer>(Path.Combine("Emails", EmailFolder, "Avatar")).sprite;
@@ -20,8 +19,13 @@ namespace Windows.Browser.Pages.Email.Data
 		public Transform Content => _content ??=
 			Resources.Load<Transform>(Path.Combine("Emails", EmailFolder, "Content"));
 
+		protected bool IsCompleted { get; set; }
+		public bool IsRead { get; set; }
+
+		private protected abstract string EmailFolder { get; }
+
 		[NonSerialized] private Sprite _avatarSprite;
 		[NonSerialized] private Transform _content;
-		private protected Action<string, string> CheckComplete;
+		[NonSerialized] private protected Action<string, string> CheckComplete;
 	}
 }

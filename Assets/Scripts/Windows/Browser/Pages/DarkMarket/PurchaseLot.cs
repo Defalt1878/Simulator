@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Windows.Browser.Pages.Email.Data;
@@ -47,7 +46,7 @@ namespace Windows.Browser.Pages.DarkMarket
 
 			instance.Stats.Money -= _info.Price;
 			_lotsInfo.Remove(_info);
-			instance.Emails.NewEmail($"{DarkMarketEmail.Name} {_info.HashRate} {GenerateAddress(6)}");
+			instance.Emails.Add(new DarkMarketEmail(GenerateAddress(6), _info.HashRate));
 		}
 
 		private static string GenerateAddress(int length)

@@ -2,7 +2,6 @@ using Windows.Browser.Pages.Email.Data;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using UserData;
 
 namespace Windows.Browser.Pages.Email
 {

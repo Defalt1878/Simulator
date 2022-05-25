@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Windows.Browser.Pages.Email.Data;
 using Random = UnityEngine.Random;
 
@@ -21,7 +22,7 @@ namespace UserData
 		private StaticData()
 		{
 			Apps = new AppsData(new[] {"Browser"}, new[] {"Stats"});
-			Emails = new EmailsData(StartEmail.Name);
+			Emails = new List<EmailData>() {new StartEmail()};
 			Stats = new GameStats
 			{
 				Money = Random.Range(0, 30)
@@ -33,7 +34,7 @@ namespace UserData
 		}
 
 		public AppsData Apps { get; private set; }
-		public EmailsData Emails { get; private set; }
+		public List<EmailData> Emails { get; private set; }
 		public GameStats Stats { get; private set; }
 		public CryptoData CryptoData { get; private set; }
 		public MiningData MiningData { get; set; }

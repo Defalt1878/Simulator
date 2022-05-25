@@ -1,3 +1,4 @@
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,7 +11,7 @@ public class EmailNotification : MonoBehaviour
 
     private void Update()
     {
-        var newEmailsCount = StaticData.GetInstance().Emails.NotReadCount;
+        var newEmailsCount = StaticData.GetInstance().Emails.Count(email => !email.IsRead);
         if (newEmailsCount == 0)
         {
             background.gameObject.SetActive(false);
