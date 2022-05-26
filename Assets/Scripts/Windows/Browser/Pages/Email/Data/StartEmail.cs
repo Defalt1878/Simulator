@@ -10,20 +10,21 @@ namespace Windows.Browser.Pages.Email.Data
 	{
 		public override string SenderName => "Зубенко М. П.";
 		public override string Subject => "Ну как там с деньгами?";
+		[NonSerialized] private Action<string, string> _checkComplete;
 
 		public override void OnLoad()
 		{
 			var instance = StaticData.GetInstance();
 			if (IsCompleted)
 				return;
-			CheckComplete = (_, _) =>
+			_checkComplete = (_, _) =>
 			{
 				if (instance.Stats.Money >= 3000)
 					OnComplete();
 			};
-			instance.Stats.OnValueChanged += CheckComplete;
+			instance.Stats.OnValueChanged += _checkComplete;
 			var clock = GameObject.Find("Desktop").GetComponentInChildren<Clock>();
-			clock.OnHourLast += (currentTime) =>
+			clock.OnHourLast += currentTime =>
 			{
 				if (IsCompleted)
 					return;
@@ -49,7 +50,7 @@ namespace Windows.Browser.Pages.Email.Data
 			if (IsCompleted)
 				return;
 			IsCompleted = true;
-			instance.Stats.OnValueChanged -= CheckComplete;
+			instance.Stats.OnValueChanged -= _checkComplete;
 			//TODO: Дописать конец игры
 		}
 

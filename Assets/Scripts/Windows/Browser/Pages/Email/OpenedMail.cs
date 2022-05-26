@@ -36,6 +36,8 @@ namespace Windows.Browser.Pages.Email
 		private void UpdateEmail()
 		{
 			EmailData.OnOpen();
+			var offsetMaxY = GetComponent<RectTransform>().offsetMax.y;
+			GetComponent<RectTransform>().offsetMax -= new Vector2(0, offsetMaxY);
 			_avatar.sprite = EmailData.AvatarSprite;
 			_senderName.text = EmailData.SenderName;
 			_subject.text = EmailData.Subject;

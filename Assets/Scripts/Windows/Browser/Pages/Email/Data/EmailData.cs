@@ -26,6 +26,5 @@ namespace Windows.Browser.Pages.Email.Data
 
 		[NonSerialized] private Sprite _avatarSprite;
 		[NonSerialized] private Transform _content;
-		[NonSerialized] private protected Action<string, string> CheckComplete;
 	}
 }
