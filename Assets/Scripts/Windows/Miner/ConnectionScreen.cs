@@ -1,3 +1,4 @@
+using Notifications;
 using TMPro;
 using UnityEngine;
 using UserData;
@@ -9,13 +10,14 @@ namespace Windows.Miner
 		[SerializeField] private TMP_InputField input;
 		[SerializeField] private GameObject connectionGame;
 		[SerializeField] private GameField game;
+		[SerializeField] private PopUpNotification notification;
 		private string _server;
 		public void TryConnect()
 		{
 			_server = input.text;
 			if (!StaticData.GetInstance().MiningData.ServersHashRates.ContainsKey(_server))
 			{
-				Debug.LogWarning("Server not found!");
+				notification.Appear("Server not found!", NotificationType.Error);
 				return;
 			}
 
@@ -35,6 +37,7 @@ namespace Windows.Miner
 			miningData.ServersHashRates.Remove(_server);
 			miningData.UserHashRate += hashRate;
 			miningData.ConnectedServersCount++;
+			notification.Appear("Connection successful!", NotificationType.Success);
 		}
 	}
 }

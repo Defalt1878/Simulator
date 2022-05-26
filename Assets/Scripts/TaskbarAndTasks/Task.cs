@@ -1,7 +1,8 @@
 using Windows;
+using DesktopAndShortcuts;
 using UnityEngine;
 
-namespace Taskbar
+namespace TaskbarAndTasks
 {
 	public class Task : MonoBehaviour
 	{
@@ -30,7 +31,7 @@ namespace Taskbar
 
 		public void Awake()
 		{
-			window = Instantiate(window, TaskBar.Desktop.transform);
+			window = Instantiate(window, Desktop.Instance.transform);
 			window.CurrentTask = this;
 			_windowCanvas = window.gameObject.GetComponent<Canvas>();
 		

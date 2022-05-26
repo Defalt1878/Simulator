@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Notifications;
 using UnityEngine;
 using UserData;
 using Random = UnityEngine.Random;
@@ -9,6 +10,7 @@ namespace Windows.Browser.Pages.DarkMarket
 	public class LotsLoader : MonoBehaviour
 	{
 		[SerializeField] private PurchaseLot lotPrefab;
+		[SerializeField] private PopUpNotification notification;
 		private List<PurchaseLotInfo> _lotsInfo;
 
 		private static readonly string[] Locations = {
@@ -41,6 +43,7 @@ namespace Windows.Browser.Pages.DarkMarket
 			{
 				var instLot = Instantiate(lotPrefab, transform);
 				instLot.Info = lotInfo;
+				instLot.Notification = notification;
 			}
 		}
 
@@ -56,6 +59,7 @@ namespace Windows.Browser.Pages.DarkMarket
 			{
 				var instLot = Instantiate(lotPrefab, transform);
 				instLot.Info = lotInfo;
+				instLot.Notification = notification;
 			}
 		}
 	}

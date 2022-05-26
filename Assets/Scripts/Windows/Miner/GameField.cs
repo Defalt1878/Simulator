@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Notifications;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -8,6 +9,7 @@ namespace Windows.Miner
 {
 	public class GameField : MonoBehaviour
 	{
+		[SerializeField] private PopUpNotification notification;
 		public ConnectionScreen ConnectionScreen { get; set; }
 		private const int FieldSize = 7;
 		private int _targetsAmount;
@@ -135,23 +137,22 @@ namespace Windows.Miner
 		{
 			if (_currentPath.LastOrDefault() != _exit)
 			{
-				Debug.Log("Exit not found!");
+				notification.Appear("Exit server not found!", NotificationType.Error);
 				return;
 			}
 
 			if (_currentPath.Count - 2 != _targetsAmount)
 			{
-				Debug.Log("Not all targets collected!");
+				notification.Appear("Not all servers connected!", NotificationType.Error);
 				return;
 			}
 
 			if (_currentLength > _bestPathLength)
 			{
-				Debug.Log("Not optimal path!");
+				notification.Appear("Not optimal connection!", NotificationType.Error);
 				return;
 			}
-
-			Debug.Log("Connection successful!");
+			
 			ConnectionScreen.GameFinished();
 		}
 	}

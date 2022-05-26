@@ -22,7 +22,7 @@ namespace UserData
 		private StaticData()
 		{
 			Apps = new AppsData(new[] {"Browser"}, new[] {"Stats"});
-			Emails = new List<EmailData>() {new StartEmail()};
+			Emails = new List<EmailData> {new StartEmail()};
 			Stats = new GameStats
 			{
 				Money = Random.Range(0, 30)

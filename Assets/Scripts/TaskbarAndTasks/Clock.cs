@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UserData;
 
-namespace Taskbar
+namespace TaskbarAndTasks
 {
 	public class Clock : MonoBehaviour
 	{

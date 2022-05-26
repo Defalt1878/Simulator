@@ -15,7 +15,6 @@ namespace UserData
 			var file = File.Create(DataSavePath);
 			bf.Serialize(file, StaticData.GetInstance());
 			file.Close();
-			Debug.Log("Game data saved!");
 		}
 
 		public static void LoadData()

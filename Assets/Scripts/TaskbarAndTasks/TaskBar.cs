@@ -2,23 +2,17 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace Taskbar
+namespace TaskbarAndTasks
 {
 	public class TaskBar : MonoBehaviour
 	{
-		public static GameObject Desktop { get; private set; }
-		public static TaskBar GetInstance() => _instance;
-		private static TaskBar _instance;
-
 		private List<Task> _runningTasks;
 		private List<Task> _runningTasksOrder;
 
 		private void Awake()
 		{
-			_instance = this;
 			_runningTasks = new List<Task>();
 			_runningTasksOrder = new List<Task>();
-			Desktop = GameObject.Find("Desktop");
 		}
 
 		public Task AddOrExpandTask(Task taskPrefab, Task instTask)
@@ -32,7 +26,7 @@ namespace Taskbar
 			instTask = Instantiate(taskPrefab, transform);
 			_runningTasks.Add(instTask);
 			_runningTasksOrder.Add(instTask);
-			instTask.Priority = _runningTasksOrder.Count - 1;
+			instTask.Priority = _runningTasksOrder.Count;
 			return instTask;
 		}
 
@@ -65,7 +59,7 @@ namespace Taskbar
 		private void SetTasksOrder()
 		{
 			for (var i = 0; i < _runningTasksOrder.Count; i++)
-				_runningTasksOrder[i].Priority = i;
+				_runningTasksOrder[i].Priority = i + 1;
 		}
 	}
 }

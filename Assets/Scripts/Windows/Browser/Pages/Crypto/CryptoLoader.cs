@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using Notifications;
 using UnityEngine;
 using UserData;
 using Random = UnityEngine.Random;
@@ -10,6 +11,7 @@ namespace Windows.Browser.Pages.Crypto
 	public class CryptoLoader : MonoBehaviour
 	{
 		[SerializeField] private CryptoLine linePrefab;
+		[SerializeField] private PopUpNotification notification;
 		private Dictionary<string, CryptoLine> _lines;
 		private CryptoData _crypto;
 		private Action<string, float> _onValueChangeAction;
@@ -66,6 +68,7 @@ namespace Windows.Browser.Pages.Crypto
 				instLine.Value = (float) property.GetValue(_crypto);
 				instLine.ExchangeRate = currencyAtt.ExchangeRate;
 				instLine.State = _state;
+				instLine.Notification = notification;
 				_lines[propName] = instLine;
 			}
 

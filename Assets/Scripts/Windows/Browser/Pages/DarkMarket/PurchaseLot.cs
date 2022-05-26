@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Windows.Browser.Pages.Email.Data;
+using Notifications;
 using TMPro;
 using UnityEngine;
 using UserData;
@@ -14,6 +15,7 @@ namespace Windows.Browser.Pages.DarkMarket
 		[SerializeField] private TextMeshProUGUI lotName;
 		[SerializeField] private TextMeshProUGUI lotInfo;
 		[SerializeField] private TextMeshProUGUI buttonText;
+		public PopUpNotification Notification { get; set; }
 		private List<PurchaseLotInfo> _lotsInfo;
 
 		private PurchaseLotInfo _info;
@@ -40,13 +42,14 @@ namespace Windows.Browser.Pages.DarkMarket
 			var instance = StaticData.GetInstance();
 			if (instance.Stats.Money < _info.Price)
 			{
-				Debug.Log("No money!");
+				Notification.Appear("Not enough money!", NotificationType.Warning);
 				return;
 			}
 
 			instance.Stats.Money -= _info.Price;
 			_lotsInfo.Remove(_info);
 			instance.Emails.Add(new DarkMarketEmail(GenerateAddress(6), _info.HashRate));
+			Notification.Appear("Purchase successful!", NotificationType.Success);
 		}
 
 		private static string GenerateAddress(int length)

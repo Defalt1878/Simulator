@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Taskbar.Start
+namespace TaskbarAndTasks.Start
 {
 	public class StartButton : MonoBehaviour
 	{

@@ -2,7 +2,7 @@ using System.IO;
 using UnityEngine;
 using UserData;
 
-namespace Desktop
+namespace DesktopAndShortcuts
 {
 	public class Shortcuts : MonoBehaviour
 	{

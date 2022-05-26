@@ -1,4 +1,5 @@
 using System.Globalization;
+using Notifications;
 using TMPro;
 using UnityEngine;
 using UserData;
@@ -13,6 +14,7 @@ namespace Windows.Browser.Pages.Crypto
 		[SerializeField] private TMP_InputField buySellValue;
 		[SerializeField] private TextMeshProUGUI cryptoToMoney;
 		[SerializeField] private TextMeshProUGUI buttonText;
+		public PopUpNotification Notification { get; set; }
 
 		private CryptoPageState _state;
 
@@ -73,7 +75,7 @@ namespace Windows.Browser.Pages.Crypto
 			var text = buySellValue.text;
 			if (text.Length > 0 && text[0] == '-')
 				buySellValue.text = text.Remove(0, 1);
-			
+
 			CryptoToMoney = BuySellValue * ExchangeRate;
 		}
 
@@ -90,7 +92,10 @@ namespace Windows.Browser.Pages.Crypto
 			var instance = StaticData.GetInstance();
 			var stats = instance.Stats;
 			if (stats.Money < CryptoToMoney)
+			{
+				Notification.Appear("Not enough money!", NotificationType.Warning);
 				return;
+			}
 
 			stats.Money -= CryptoToMoney;
 
@@ -102,7 +107,11 @@ namespace Windows.Browser.Pages.Crypto
 		private void TrySell()
 		{
 			if (Value < BuySellValue)
+			{
+				Notification.Appear("Not enough crypto!", NotificationType.Warning);
 				return;
+			}
+
 			var instance = StaticData.GetInstance();
 			var stats = instance.Stats;
 			stats.Money += CryptoToMoney;

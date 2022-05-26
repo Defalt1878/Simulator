@@ -37,13 +37,14 @@ namespace Windows.Browser.Pages.Email
 			_avatar.sprite = EmailData.AvatarSprite;
 			_senderName.text = EmailData.SenderName;
 			_subject.text = EmailData.Subject;
-			// newEmailNotification.SetActive(StaticData.GetInstance().Emails.IsRead(EmailData.));
+			newEmailNotification.SetActive(!EmailData.IsRead);
 		}
 
 		public void OnClick()
 		{
 			OpenedMail.gameObject.SetActive(true);
 			OpenedMail.EmailData = EmailData;
+			newEmailNotification.SetActive(!EmailData.IsRead);
 		}
 	}
 }
