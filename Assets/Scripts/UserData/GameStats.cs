@@ -19,7 +19,7 @@ namespace UserData
 			}
 		}
 
-		public string MoneyStr => $"{Money:0.00} $";
+		public string MoneyStr => $"${Money:n}";
 
 		[field: NonSerialized] public event Action<string, string> OnValueChanged;
 	}

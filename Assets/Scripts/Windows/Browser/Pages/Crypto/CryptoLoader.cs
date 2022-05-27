@@ -65,7 +65,7 @@ namespace Windows.Browser.Pages.Crypto
 				var instLine = Instantiate(linePrefab, transform);
 				var propName = property.Name;
 				instLine.Name = propName;
-				instLine.Value = (float) property.GetValue(_crypto);
+				instLine.CryptoAmount = (float) property.GetValue(_crypto);
 				instLine.ExchangeRate = currencyAtt.ExchangeRate;
 				instLine.State = _state;
 				instLine.Notification = notification;
@@ -75,7 +75,7 @@ namespace Windows.Browser.Pages.Crypto
 			_onValueChangeAction = (cryptoName, newValue) =>
 			{
 				if (_lines.ContainsKey(cryptoName))
-					_lines[cryptoName].Value = newValue;
+					_lines[cryptoName].CryptoAmount = newValue;
 			};
 			_crypto.OnValueChanged += _onValueChangeAction;
 			_onRateChangeAction = (cryptoName, newValue) =>

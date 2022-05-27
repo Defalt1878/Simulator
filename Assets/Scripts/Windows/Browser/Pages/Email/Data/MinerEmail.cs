@@ -13,7 +13,6 @@ namespace Windows.Browser.Pages.Email.Data
 
 		public override void OnLoad()
 		{
-			var instance = StaticData.GetInstance();
 			if (IsCompleted)
 				return;
 			CheckComplete = hashRateValue =>
@@ -21,7 +20,7 @@ namespace Windows.Browser.Pages.Email.Data
 				if (hashRateValue >= 150)
 					OnComplete();
 			};
-			instance.MiningData.OnHashRateChanged += CheckComplete;
+			// StaticData.GetInstance().MiningData.OnHashRateChanged += CheckComplete;
 		}
 
 		public override void OnOpen()

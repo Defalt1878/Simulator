@@ -7,6 +7,7 @@ namespace Windows.Browser
 	public class SitePanel : MonoBehaviour
 	{
 		[SerializeField] private Transform window;
+		[SerializeField] private LoadingScreen loadingScreen;
 		private Page _currentPage;
 		private Text _text;
 
@@ -18,15 +19,17 @@ namespace Windows.Browser
 
 		public void OpenTab(Page page)
 		{
-			_currentPage = Instantiate(page, window);
 			gameObject.SetActive(true);
 			_text.text = page.pageName;
+			loadingScreen.OnLoadEnd += () => _currentPage = Instantiate(page, window);
+			loadingScreen.StartLoading();
 		}
 
 		public void CloseTab()
 		{
-			Destroy(_currentPage.gameObject);
 			gameObject.SetActive(false);
+			Destroy(_currentPage.gameObject);
+			loadingScreen.StartLoading();
 		}
 	}
 }

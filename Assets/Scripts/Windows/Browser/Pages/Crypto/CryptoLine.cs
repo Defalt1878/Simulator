@@ -9,7 +9,7 @@ namespace Windows.Browser.Pages.Crypto
 	public class CryptoLine : MonoBehaviour
 	{
 		[SerializeField] private TextMeshProUGUI cryptoName;
-		[SerializeField] private TextMeshProUGUI value;
+		[SerializeField] private TextMeshProUGUI cryptoAmount;
 		[SerializeField] private TextMeshProUGUI exchangeRate;
 		[SerializeField] private TMP_InputField buySellValue;
 		[SerializeField] private TextMeshProUGUI cryptoToMoney;
@@ -37,28 +37,41 @@ namespace Windows.Browser.Pages.Crypto
 			set => cryptoName.text = value;
 		}
 
-		public float Value
+		private float _cryptoAmount;
+
+		public float CryptoAmount
 		{
-			get => string.IsNullOrEmpty(value.text)
-				? 0
-				: float.Parse(value.text);
-			set => this.value.text = $"{value:0.####}";
+			get => _cryptoAmount;
+			set
+			{
+				_cryptoAmount = value;
+				cryptoAmount.text = $"{_cryptoAmount:0.####}";
+			}
 		}
+
+		private float _exchangeRate;
 
 		public float ExchangeRate
 		{
-			get => string.IsNullOrEmpty(exchangeRate.text)
-				? 0
-				: float.Parse(exchangeRate.text[..^2]);
-			set => exchangeRate.text = $"{value:0.##} $";
+			get => _exchangeRate;
+			set
+			{
+				_exchangeRate = value;
+				exchangeRate.text = $"{_exchangeRate:C}";
+				CryptoToMoney = BuySellValue * ExchangeRate;
+			}
 		}
+
+		private float _cryptoToMoney;
 
 		public float CryptoToMoney
 		{
-			get => string.IsNullOrEmpty(cryptoToMoney.text)
-				? 0
-				: float.Parse(cryptoToMoney.text[2..^2]);
-			set => cryptoToMoney.text = $"= {value:0.##} $";
+			get => _cryptoToMoney;
+			set
+			{
+				_cryptoToMoney = value;
+				cryptoToMoney.text = $"= ${_cryptoToMoney:n}";
+			}
 		}
 
 		private float BuySellValue
@@ -101,12 +114,12 @@ namespace Windows.Browser.Pages.Crypto
 
 			var crypto = instance.CryptoData;
 			var cryptoProperty = crypto.GetType().GetProperty(Name);
-			cryptoProperty?.SetValue(crypto, Value + BuySellValue);
+			cryptoProperty?.SetValue(crypto, CryptoAmount + BuySellValue);
 		}
 
 		private void TrySell()
 		{
-			if (Value < BuySellValue)
+			if (CryptoAmount < BuySellValue)
 			{
 				Notification.Appear("Not enough crypto!", NotificationType.Warning);
 				return;
@@ -118,7 +131,7 @@ namespace Windows.Browser.Pages.Crypto
 
 			var crypto = instance.CryptoData;
 			var cryptoProperty = crypto.GetType().GetProperty(Name);
-			cryptoProperty?.SetValue(crypto, Value - BuySellValue);
+			cryptoProperty?.SetValue(crypto, CryptoAmount - BuySellValue);
 		}
 	}
 }

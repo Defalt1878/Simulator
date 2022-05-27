@@ -285,7 +285,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cryptoName: {fileID: 1114872383149776711}
-  value: {fileID: 6224107181133494997}
+  cryptoAmount: {fileID: 6224107181133494997}
   exchangeRate: {fileID: 4984099051138929827}
   buySellValue: {fileID: 7346210412526301620}
   cryptoToMoney: {fileID: 4602489153425894203}
@@ -646,7 +646,7 @@ GameObject:
   - component: {fileID: 8526930872187703374}
   - component: {fileID: 6224107181133494997}
   m_Layer: 5
-  m_Name: Value
+  m_Name: CryptoAmount
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -865,16 +865,16 @@ MonoBehaviour:
   m_fontSize: 30
   m_fontSizeBase: 30
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 1
+  m_fontSizeMax: 31
   m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: -70
+  m_lineSpacing: 1000
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
