@@ -13,6 +13,7 @@ namespace DesktopAndShortcuts
 		[SerializeField] private PopUpNotification globalNotification;
 		public static Desktop Instance { get; private set; }
 		public static TaskBar Taskbar { get; private set; }
+		public static Clock Clock { get; private set; }
 		public static PopUpNotification GlobalNotification { get; private set; }
 		private int _receivedEmailsCount;
 
@@ -20,6 +21,7 @@ namespace DesktopAndShortcuts
 		{
 			Instance = this;
 			Taskbar = taskBar;
+			Clock = GetComponentInChildren<Clock>();
 			GlobalNotification = globalNotification;
 		}
 

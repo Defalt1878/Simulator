@@ -8,7 +8,7 @@ namespace TaskbarAndTasks
 {
 	public class Clock : MonoBehaviour
 	{
-		private const float TimeFactorRealToGame = 200;
+		private const float TimeFactorRealToGame = 1000; //200
 		private const string OutputFormat = "h:mm tt\ndd/MM/yy";
 		private const float WaitTime = 60 / TimeFactorRealToGame;
 

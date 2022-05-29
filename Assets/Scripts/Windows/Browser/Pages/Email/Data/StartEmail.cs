@@ -1,6 +1,6 @@
 using System;
-using TaskbarAndTasks;
-using UnityEngine;
+using DesktopAndShortcuts;
+using Final;
 using UserData;
 
 namespace Windows.Browser.Pages.Email.Data
@@ -10,28 +10,37 @@ namespace Windows.Browser.Pages.Email.Data
 	{
 		public override string SenderName => "Зубенко М. П.";
 		public override string Subject => "Ну как там с деньгами?";
-		[NonSerialized] private Action<string, string> _checkComplete;
+		private bool _finalPayEmailReceived;
+		private bool _unknownFinalEmailReceived;
+		[NonSerialized] private Action<DateTime> _onHourLastAction;
 
 		public override void OnLoad()
 		{
-			var instance = StaticData.GetInstance();
 			if (IsCompleted)
 				return;
-			_checkComplete = (_, _) =>
-			{
-				if (instance.Stats.Money >= 3000)
-					OnComplete();
-			};
-			instance.Stats.OnValueChanged += _checkComplete;
-			var clock = GameObject.Find("Desktop").GetComponentInChildren<Clock>();
-			clock.OnHourLast += currentTime =>
+			_onHourLastAction = currentTime =>
 			{
 				if (IsCompleted)
 					return;
+				var instance = StaticData.GetInstance();
 				var timeSpan = currentTime - instance.StartTime;
-				if (timeSpan.Hours >= 24)
+				if (!_finalPayEmailReceived && timeSpan.TotalHours >= 21)
+				{
+					_finalPayEmailReceived = true;
+					instance.Emails.Add(new FinalPayEmail());
+				}
+
+				if (!_unknownFinalEmailReceived && timeSpan.TotalHours >= 22)
+				{
+					_unknownFinalEmailReceived = true;
+					instance.Emails.Add(new UnknownFinalEmail());
+				}
+
+				if (timeSpan.TotalHours >= 24)
 					GameFailed();
 			};
+
+			Desktop.Clock.OnHourLast += _onHourLastAction;
 		}
 
 		public override void OnOpen()
@@ -44,19 +53,16 @@ namespace Windows.Browser.Pages.Email.Data
 			instance.Emails.Add(new CmdEmail());
 		}
 
-		private void OnComplete()
+		public void GameFinished()
 		{
-			var instance = StaticData.GetInstance();
-			if (IsCompleted)
-				return;
 			IsCompleted = true;
-			instance.Stats.OnValueChanged -= _checkComplete;
-			//TODO: Дописать конец игры
+			Desktop.Clock.OnHourLast -= _onHourLastAction;
 		}
 
 		private void GameFailed()
 		{
-			//TODO: Дописать конец игры
+			GameFinished();
+			FinalScreens.GameFailedScreen.StartAnimation(DataSaver.ResetData);
 		}
 
 		private protected override string EmailFolder => "Start";
