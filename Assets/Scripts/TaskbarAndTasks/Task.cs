@@ -12,7 +12,7 @@ namespace TaskbarAndTasks
 			set
 			{
 				_isMinimized = value;
-				_windowCanvas.enabled = !_isMinimized;
+				_windowAnimator.SetBool(Minimized, _isMinimized);
 				if (!_isMinimized)
 					_taskBar.TryMoveUpTask(this);
 			}
@@ -25,15 +25,18 @@ namespace TaskbarAndTasks
 		}
 
 		[SerializeField] public Window window;
+		private Animator _windowAnimator;
 		private bool _isMinimized;
 		private Canvas _windowCanvas;
 		private TaskBar _taskBar;
+		private static readonly int Minimized = Animator.StringToHash("Minimized");
 
 		public void Awake()
 		{
 			window = Instantiate(window, Desktop.Instance.transform);
 			window.CurrentTask = this;
-			_windowCanvas = window.gameObject.GetComponent<Canvas>();
+			_windowAnimator = window.GetComponent<Animator>();
+			_windowCanvas = window.GetComponent<Canvas>();
 		
 			_taskBar = GetComponentInParent<TaskBar>();
 		}

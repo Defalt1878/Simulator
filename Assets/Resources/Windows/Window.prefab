@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5974243093458437776}
   - component: {fileID: 5404013979433983914}
   - component: {fileID: 54183737576098427}
+  - component: {fileID: 7089729917465494957}
   m_Layer: 5
   m_Name: Window
   m_TagString: Untagged
@@ -91,6 +92,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   winName: 
+--- !u!95 &7089729917465494957
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4710193053698901900}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: bc8a3848ec7f66a42b5873db72c69a93, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &5973756490047720263
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -140,7 +161,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7362067420197889854, guid: 9c912370d7ed5444c8d84ffd2b407176, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 50
+      value: 55
       objectReference: {fileID: 0}
     - target: {fileID: 7362067420197889854, guid: 9c912370d7ed5444c8d84ffd2b407176, type: 3}
       propertyPath: m_LocalPosition.x

@@ -3,7 +3,7 @@ using UnityEngine.EventSystems;
 
 namespace Windows.Panel
 {
-	public class DragHandler : MonoBehaviour
+	public class DragHandler : MonoBehaviour, IPointerDownHandler, IDragHandler
 	{
 		private Vector2 _lastMousePos;
 		private Window _window;
@@ -15,17 +15,15 @@ namespace Windows.Panel
 			_window = GetComponentInParent<Window>();
 		}
 
-		public void OnDragStarted(BaseEventData eventData)
+		public void OnPointerDown(PointerEventData eventData)
 		{
-			var pointerEventData = (PointerEventData) eventData;
-			_lastMousePos = _camera.ScreenToWorldPoint(pointerEventData.position);
+			_lastMousePos = _camera.ScreenToWorldPoint(eventData.position);
 			_window.CurrentTask.IsMinimized = false;
 		}
 
-		public void OnDrag(BaseEventData eventData)
+		public void OnDrag(PointerEventData eventData)
 		{
-			var pointerEventData = (PointerEventData) eventData;
-			var mousePos = (Vector2) _camera.ScreenToWorldPoint(pointerEventData.position);
+			var mousePos = (Vector2) _camera.ScreenToWorldPoint(eventData.position);
 			var mouseDelta = mousePos - _lastMousePos;
 			_window.transform.position += (Vector3) mouseDelta;
 			_lastMousePos = mousePos;
