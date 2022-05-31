@@ -1,5 +1,8 @@
-﻿namespace Windows.Browser.Pages.Email.Data
+﻿using System;
+
+namespace Windows.Browser.Pages.Email.Data
 {
+	[Serializable]
 	public class SlotsEmail : EmailData
 	{
 		public override string SenderName => "Developer";

@@ -26,9 +26,13 @@ namespace Windows.Miner
 		{
 			_targetsAmount = targetsAmount;
 			_canBeSelected = new HashSet<Vector2Int>();
-			GenerateGameField();
-			ResetGame();
-			_bestPathLength = PathFinder.FindBestPathLength(_field, _start, _exit);
+			while (true)
+			{
+				GenerateGameField();
+				ResetGame();
+				if (PathFinder.FindBestPathLength(_field, _start, _exit, out _bestPathLength))
+					break;
+			}
 		}
 
 		private void GenerateGameField()
@@ -152,7 +156,7 @@ namespace Windows.Miner
 				notification.Appear("Not optimal connection!", NotificationType.Error);
 				return;
 			}
-			
+
 			ConnectionScreen.GameFinished();
 		}
 	}

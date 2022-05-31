@@ -6,84 +6,43 @@ namespace Windows.Miner
 {
 	public static class PathFinder
 	{
-		public static int FindBestPathLength(GameCell[,] field, Vector2Int start, Vector2Int exit)
+		public static bool FindBestPathLength(GameCell[,] field, Vector2Int start, Vector2Int exit, out int length)
 		{
-			var points = field
+			length = -1;
+			var fieldSize = field.GetLength(0);
+			var targets = field
 				.Cast<GameCell>()
 				.Where(cell => cell.Type == CellType.Target)
 				.Select(cell => cell.Position)
-				.Concat(new[] {start, exit})
 				.ToHashSet();
-			var lengthDictionary = GetLengthDictionary(points, field.GetLength(0));
-			var queue = new Queue<(Vector2Int pos, HashSet<Vector2Int> visited, int length)>();
-			queue.Enqueue((start, new HashSet<Vector2Int> {start}, 1));
-			var bestLength = int.MaxValue;
+
+			var queue = new Queue<(HashSet<Vector2Int> visited, Vector2Int pos, int targetsCollected)>();
+			queue.Enqueue((new HashSet<Vector2Int> {start}, start, 0));
 			while (queue.Any())
 			{
-				var (pos, visited, length) = queue.Dequeue();
+				var (visited, pos, targetsCollected) = queue.Dequeue();
 				if (pos == exit)
 				{
-					if (visited.Count != points.Count)
+					if (targetsCollected != targets.Count)
 						continue;
-					if (length < bestLength)
-						bestLength = length;
+					length = visited.Count;
+					return true;
 				}
 
-				foreach (var newPos in points.Where(p => !visited.Contains(p)))
+				foreach (var newPos in GetNeighbours4(pos, fieldSize).Except(visited))
 				{
-					var newLength = lengthDictionary[(pos, newPos)];
-					queue.Enqueue((newPos, new HashSet<Vector2Int>(visited) {newPos}, length + newLength));
+					if (targets.Contains(newPos))
+					{
+						queue.Clear();
+						queue.Enqueue((new HashSet<Vector2Int>(visited) {newPos}, newPos, targetsCollected + 1));
+						break;
+					}
+
+					queue.Enqueue((new HashSet<Vector2Int>(visited) {newPos}, newPos, targetsCollected));
 				}
 			}
 
-			return bestLength;
-		}
-
-		private static Dictionary<(Vector2Int start, Vector2Int end), int> GetLengthDictionary(
-			IEnumerable<Vector2Int> targets,
-			int fieldSize
-		)
-		{
-			var dictionary = new Dictionary<(Vector2Int start, Vector2Int end), int>();
-			var points = targets.ToArray();
-			for (var i = 1; i < points.Length; i++)
-			{
-				var target1 = points[i - 1];
-				foreach (var (target2, length) in GetPathLengths(target1, points[i..], fieldSize))
-				{
-					dictionary[(target1, target2)] = length;
-					dictionary[(target2, target1)] = length;
-				}
-			}
-
-			return dictionary;
-		}
-
-		private static IEnumerable<(Vector2Int end, int length)> GetPathLengths(
-			Vector2Int start,
-			IEnumerable<Vector2Int> targets,
-			int fieldSize
-		)
-		{
-			var queue = new Queue<(Vector2Int pos, int length)>();
-			queue.Enqueue((start, 0));
-			var visited = new HashSet<Vector2Int> {start};
-			var targetsSet = targets.ToHashSet();
-			while (queue.Any())
-			{
-				var (pos, length) = queue.Dequeue();
-				visited.Add(pos);
-				if (targetsSet.Contains(pos))
-				{
-					yield return (pos, length);
-					targetsSet.Remove(pos);
-					if (targetsSet.Count == 0)
-						yield break;
-				}
-
-				foreach (var neighbour in GetNeighbours4(pos, fieldSize).Where(v => !visited.Contains(v)))
-					queue.Enqueue((neighbour, length + 1));
-			}
+			return false;
 		}
 
 		public static IEnumerable<Vector2Int> GetNeighbours4(Vector2Int current, int fieldSize)

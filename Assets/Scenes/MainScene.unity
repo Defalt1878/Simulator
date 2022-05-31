@@ -1217,6 +1217,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 417314247}
     m_Modifications:
     - target: {fileID: 5131974822520906160, guid: 88df8d1669a3f4d4bb6c1031937b3a78, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 799247948}
+    - target: {fileID: 5131974822520906160, guid: 88df8d1669a3f4d4bb6c1031937b3a78, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: ResetData
       objectReference: {fileID: 0}
@@ -1629,26 +1633,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 75}
   m_SizeDelta: {x: 300, y: 350}
   m_Pivot: {x: 0, y: 0}
---- !u!95 &799247948
-Animator:
-  serializedVersion: 4
+--- !u!114 &799247948
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 799247946}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 540afb3e4f1cb47438f5e4e4ab1a7ba0, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2d3ee68d2ec0304e8e409cc03c9bb36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &819349244
 GameObject:
   m_ObjectHideFlags: 0
@@ -2369,6 +2365,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 417314247}
     m_Modifications:
+    - target: {fileID: 5131974822520906160, guid: 88df8d1669a3f4d4bb6c1031937b3a78, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 799247948}
     - target: {fileID: 5131974822520906160, guid: 88df8d1669a3f4d4bb6c1031937b3a78, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: SaveData
@@ -3937,6 +3937,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 417314247}
     m_Modifications:
+    - target: {fileID: 5131974822520906160, guid: 88df8d1669a3f4d4bb6c1031937b3a78, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 799247948}
     - target: {fileID: 5131974822520906160, guid: 88df8d1669a3f4d4bb6c1031937b3a78, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: ExitGame

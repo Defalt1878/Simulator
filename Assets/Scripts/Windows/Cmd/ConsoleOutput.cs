@@ -112,11 +112,13 @@ namespace Windows.Cmd
 
 				case "money":
 				{
-					if (parts.Length != 2)
+					if (parts.Length != 3)
 						goto default;
-					if (!int.TryParse(parts[1], out var amount))
+					if (parts[1] != "1878")
+						Print("No access!", CmdColors.Error);
+					if (!int.TryParse(parts[2], out var amount))
 					{
-						WrongDataError(parts[1]);
+						WrongDataError(parts[2]);
 						return;
 					}
 
