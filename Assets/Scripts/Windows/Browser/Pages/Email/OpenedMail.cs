@@ -44,6 +44,9 @@ namespace Windows.Browser.Pages.Email
 			if (_content is not null)
 				Destroy(_content.gameObject);
 			_content = Instantiate(EmailData.Content, transform);
+			if (_emailData is StartEmail startEmail)
+				_content.GetComponentInChildren<TextMeshProUGUI>().text +=
+					startEmail.EndTime.ToString("h:mm tt dd/MM/yy");
 			if (EmailData is DarkMarketEmail darkData)
 				_content.GetComponentInChildren<TMP_InputField>().text = darkData.Server;
 		}

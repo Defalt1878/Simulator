@@ -10,6 +10,7 @@ namespace Windows.Browser.Pages.Email.Data
 	{
 		public override string SenderName => "Зубенко М. П.";
 		public override string Subject => "Ну как там с деньгами?";
+		public DateTime EndTime;
 		private bool _finalPayEmailReceived;
 		private bool _unknownFinalEmailReceived;
 		[NonSerialized] private Action<DateTime> _onHourLastAction;
@@ -50,6 +51,7 @@ namespace Windows.Browser.Pages.Email.Data
 				return;
 			IsRead = true;
 			instance.StartTime = instance.CurrentTime;
+			EndTime = instance.StartTime + new TimeSpan(24, 0, 0);
 			instance.Emails.Add(new CmdEmail());
 		}
 

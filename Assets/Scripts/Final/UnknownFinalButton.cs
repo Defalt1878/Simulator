@@ -18,10 +18,10 @@ namespace Final
 		public void OnClick()
 		{
 			var instance = StaticData.GetInstance();
-			if (instance.Stats.Money < 2000)
+			if (instance.Stats.Money < 1500)
 				return;
 			GetComponent<Button>().interactable = false;
-			instance.Stats.Money -= 2000;
+			instance.Stats.Money -= 1500;
 			var emails = instance.Emails;
 			(emails.Single(data => data is StartEmail) as StartEmail)?.GameFinished();
 			if (emails.SingleOrDefault(data => data is FinalPayEmail) is FinalPayEmail email)

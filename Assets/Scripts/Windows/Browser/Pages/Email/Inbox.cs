@@ -27,6 +27,13 @@ namespace Windows.Browser.Pages.Email
 			var childCount = transform.childCount;
 			if (childCount == _receivedEmails.Count)
 				return;
+			if (childCount > _receivedEmails.Count)
+			{
+				foreach (Transform child in transform)
+					Destroy(child.gameObject);
+				childCount = 0;
+			}
+
 			for (var i = childCount; i < _receivedEmails.Count; i++)
 				InstantiateEmail(_receivedEmails[i]);
 		}
