@@ -6,7 +6,7 @@ namespace Windows.Browser.Pages.Email.Data
 	public class FinalPayEmail : EmailData
 	{
 		public override string SenderName => "Зубенко М. П.";
-		public override string Subject => "Ну как там с деньгами?";
+		public override string Subject => "Время на исходе";
 
 		public override void OnLoad()
 		{

@@ -20,7 +20,7 @@ namespace Windows.Browser.Pages.Email.Data
 				if (hashRateValue >= 150)
 					OnComplete();
 			};
-			// StaticData.GetInstance().MiningData.OnHashRateChanged += CheckComplete;
+			StaticData.GetInstance().MiningData.OnHashRateChanged += CheckComplete;
 		}
 
 		public override void OnOpen()
@@ -39,8 +39,7 @@ namespace Windows.Browser.Pages.Email.Data
 				return;
 			IsCompleted = true;
 			instance.MiningData.OnHashRateChanged -= CheckComplete;
-			Debug.Log("Miner Email Completed");
-			//TODO
+			instance.Emails.Add(new SlotsEmail());
 		}
 
 		private protected override string EmailFolder => "Miner";

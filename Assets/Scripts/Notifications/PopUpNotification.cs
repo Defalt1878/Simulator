@@ -10,6 +10,11 @@ namespace Notifications
 	{
 		[SerializeField] private Image background;
 		[SerializeField] private TextMeshProUGUI content;
+		[SerializeField] private AudioSource audioSource;
+		[SerializeField] private AudioClip defaultAudio;
+		[SerializeField] private AudioClip warningAudio;
+		[SerializeField] private AudioClip errorAudio;
+		[SerializeField] private AudioClip successAudio;
 
 		private const float NotificationAnimationTime = 4f;
 		private const int IterationsInCycle = 200;
@@ -34,6 +39,15 @@ namespace Notifications
 					_ => throw new ArgumentOutOfRangeException()
 				};
 				content.color = new Color(0f, 0f, 0f, StartTransparency);
+
+				audioSource.clip = value switch
+				{
+					NotificationType.Default => defaultAudio,
+					NotificationType.Warning => warningAudio,
+					NotificationType.Error => errorAudio,
+					NotificationType.Success => successAudio,
+					_ => throw new ArgumentOutOfRangeException()
+				};
 			}
 		}
 
@@ -49,6 +63,7 @@ namespace Notifications
 
 		private IEnumerator ShowCoroutine()
 		{
+			audioSource.Play();
 			var transparencyChangingClr = new Color(0f, 0f, 0f, StartTransparency / IterationsInCycle);
 			yield return new WaitForSeconds(1.5f);
 			for (var i = 0; i < IterationsInCycle; i++)
