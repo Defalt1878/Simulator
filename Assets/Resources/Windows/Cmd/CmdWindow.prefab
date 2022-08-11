@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 158242998}
   - component: {fileID: 158242997}
   m_Layer: 5
-  m_Name: Content (Console Output)
+  m_Name: Content (Console)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -784,7 +784,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cc2dd1c5251ecb43b8cc0110bdbad1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  consoleOutput: {fileID: 158242997}
+  input: {fileID: 1672197443}
+  console: {fileID: 158242997}
+  commandsExecutor: {fileID: 4835408610589465658}
 --- !u!1 &1676568096
 GameObject:
   m_ObjectHideFlags: 0
@@ -966,7 +968,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4710193053698901900, guid: 09f0e7b674276dc4e887b7028d12ca1c, type: 3}
       propertyPath: m_Name
-      value: Window
+      value: CmdWindow
       objectReference: {fileID: 0}
     - target: {fileID: 5974243093458437776, guid: 09f0e7b674276dc4e887b7028d12ca1c, type: 3}
       propertyPath: m_SortingOrder
@@ -974,10 +976,28 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5974243093458437776, guid: 09f0e7b674276dc4e887b7028d12ca1c, type: 3}
       propertyPath: m_AdditionalShaderChannelsFlag
-      value: 0
+      value: 25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 09f0e7b674276dc4e887b7028d12ca1c, type: 3}
+--- !u!1 &7748585750943413978 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4710193053698901900, guid: 09f0e7b674276dc4e887b7028d12ca1c, type: 3}
+  m_PrefabInstance: {fileID: 3086502929140478294}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4835408610589465658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7748585750943413978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd9e28eff09a4c6e82b067a71dbdd2f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  console: {fileID: 158242997}
 --- !u!224 &7748585750943413981 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4710193053698901899, guid: 09f0e7b674276dc4e887b7028d12ca1c, type: 3}
