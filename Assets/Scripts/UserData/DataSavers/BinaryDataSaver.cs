@@ -3,13 +3,13 @@ using System.Reflection;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
-namespace UserData
+namespace UserData.DataSavers
 {
-	public static class DataSaver
+	public class BinaryDataSaver : IDataSaver
 	{
 		private static readonly string DataSavePath = Path.Combine(Application.persistentDataPath, "SaveData.dat");
 
-		public static void SaveData()
+		public void SaveData()
 		{
 			var bf = new BinaryFormatter();
 			var file = File.Create(DataSavePath);
@@ -17,24 +17,17 @@ namespace UserData
 			file.Close();
 		}
 
-		public static void LoadData()
+		public StaticData LoadData()
 		{
 			if (!File.Exists(DataSavePath))
-				return;
+				return null;
 
 			var bf = new BinaryFormatter();
 			var file = File.Open(DataSavePath, FileMode.Open);
-			var savedData = (StaticData) bf.Deserialize(file);
-			var currentData = StaticData.GetInstance();
-			foreach (var property in typeof(StaticData).GetProperties())
-			{
-				var savedValue = property.GetValue(savedData);
-				if (savedValue is not null)
-					property.SetValue(currentData, savedValue);
-			}
+			return (StaticData) bf.Deserialize(file);
 		}
 
-		public static void ResetData()
+		public void ResetData()
 		{
 			if (File.Exists(DataSavePath))
 				File.Delete(DataSavePath);

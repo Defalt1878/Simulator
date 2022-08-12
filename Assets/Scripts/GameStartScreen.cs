@@ -7,7 +7,7 @@ public class GameStartScreen : MonoBehaviour
 	private Task _loadingTask;
 	private const float LoadingScreenMinTime = 2f;
 
-	private void Awake()
+	private void Start()
 	{
 		_loadingTask = Task.Run(StaticData.GetInstance);
 		Invoke(nameof(StartGame), LoadingScreenMinTime);

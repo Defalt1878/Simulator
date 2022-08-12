@@ -40,7 +40,7 @@ namespace Windows.Miner
 			// ReSharper disable once IteratorNeverReturns
 		}
 
-		private IEnumerator MiningCoroutine()
+		private static IEnumerator MiningCoroutine()
 		{
 			var miningData = StaticData.GetInstance().MiningData;
 			var cryptoData = StaticData.GetInstance().CryptoData;
@@ -48,7 +48,7 @@ namespace Windows.Miner
 			{
 				yield return new WaitForSeconds(MiningUpdateTime);
 				var bitcoinsMined = miningData.UserHashRate / miningData.BtcHashRate * MiningUpdateTime;
-				cryptoData.Bitcoin += bitcoinsMined;
+				cryptoData.Bitcoin.Value += bitcoinsMined;
 			}
 			// ReSharper disable once IteratorNeverReturns
 		}

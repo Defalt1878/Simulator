@@ -1,29 +1,34 @@
+using System;
 using TMPro;
 using UnityEngine;
+using UserData;
 
 namespace Windows.Stats
 {
 	public class StatLine : MonoBehaviour
 	{
-		public string Name
+		[SerializeField] private TextMeshProUGUI statName;
+		[SerializeField] private TextMeshProUGUI statValue;
+
+		private Action<IStat> _onValueChangeAction;
+		private IStat _stat;
+
+		public IStat Stat
 		{
-			get => _statName.text;
-			set => _statName.text = value;
+			get => _stat;
+			set
+			{
+				_stat = value ?? throw new ArgumentNullException();
+				statName.text = _stat.Name;
+				statValue.text = _stat.StrValue;
+				_onValueChangeAction = stat => statValue.text = stat.StrValue;
+				_stat.OnValueChanged += _onValueChangeAction;
+			}
 		}
-		
-		public string Value
+
+		private void OnDestroy()
 		{
-			get => _statValue.text;
-			set => _statValue.text = value;
-		}
-		
-		private TextMeshProUGUI _statName;
-		private TextMeshProUGUI _statValue;
-	
-		private void Awake()
-		{
-			_statName = transform.Find("Name").GetComponent<TextMeshProUGUI>();
-			_statValue = transform.Find("Value").GetComponent<TextMeshProUGUI>();
+			_stat.OnValueChanged -= _onValueChangeAction;
 		}
 	}
 }

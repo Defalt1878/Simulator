@@ -6,12 +6,12 @@ namespace Windows.Panel
 {
 	public class WindowPanel : MonoBehaviour
 	{
+		[SerializeField] private TextMeshProUGUI windowName;
 		private Vector2 _lastMousePos;
 
-		private void Awake()
+		private void Start()
 		{
-			var text = GetComponentInChildren<TextMeshProUGUI>();
-			text.text = GetComponentInParent<Window>().winName;
+			windowName.text = GetComponentInParent<Window>().winName;
 		}
 
 		public void Minimize() =>

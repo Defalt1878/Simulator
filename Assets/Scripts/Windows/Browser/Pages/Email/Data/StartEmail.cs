@@ -50,7 +50,7 @@ namespace Windows.Browser.Pages.Email.Data
 			if (IsRead)
 				return;
 			IsRead = true;
-			instance.StartTime = instance.CurrentTime;
+			instance.StartTime = instance.CurrentInGameTime;
 			EndTime = instance.StartTime + new TimeSpan(24, 0, 0);
 			instance.Emails.Add(new CmdEmail());
 		}
@@ -64,7 +64,7 @@ namespace Windows.Browser.Pages.Email.Data
 		private void GameFailed()
 		{
 			GameFinished();
-			FinalScreens.GameFailedScreen.StartAnimation(DataSaver.ResetData);
+			FinalScreens.GameFailedScreen.StartAnimation(StaticData.DataSaver.ResetData);
 		}
 
 		private protected override string EmailFolder => "Start";

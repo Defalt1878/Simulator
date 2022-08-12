@@ -25,11 +25,11 @@ namespace TaskbarAndTasks
 			while (true)
 			{
 				var instance = StaticData.GetInstance();
-				instance.CurrentTime = instance.CurrentTime.AddMinutes(1);
+				instance.CurrentInGameTime = instance.CurrentInGameTime.AddMinutes(1);
 				yield return new WaitForSeconds(WaitTime);
-				UpdateTimeOutput(instance.CurrentTime);
-				if (instance.CurrentTime.Minute == 0)
-					OnHourLast?.Invoke(instance.CurrentTime);
+				UpdateTimeOutput(instance.CurrentInGameTime);
+				if (instance.CurrentInGameTime.Minute == 0)
+					OnHourLast?.Invoke(instance.CurrentInGameTime);
 			}
 			// ReSharper disable once IteratorNeverReturns
 		}

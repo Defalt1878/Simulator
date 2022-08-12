@@ -1,5 +1,4 @@
 using System;
-using UnityEngine;
 using UserData;
 
 namespace Windows.Browser.Pages.Email.Data
@@ -9,18 +8,18 @@ namespace Windows.Browser.Pages.Email.Data
 	{
 		public override string SenderName => "Unknown";
 		public override string Subject => "Bitcoins";
-		[NonSerialized] private protected Action<float> CheckComplete;
+		[NonSerialized] private protected Action<int, float> CheckComplete;
 
 		public override void OnLoad()
 		{
 			if (IsCompleted)
 				return;
-			CheckComplete = hashRateValue =>
+			CheckComplete = (_, hashRateValue) =>
 			{
 				if (hashRateValue >= 150)
 					OnComplete();
 			};
-			StaticData.GetInstance().MiningData.OnHashRateChanged += CheckComplete;
+			StaticData.GetInstance().MiningData.OnNewServerConnected += CheckComplete;
 		}
 
 		public override void OnOpen()
@@ -38,7 +37,7 @@ namespace Windows.Browser.Pages.Email.Data
 			if (IsCompleted)
 				return;
 			IsCompleted = true;
-			instance.MiningData.OnHashRateChanged -= CheckComplete;
+			instance.MiningData.OnNewServerConnected -= CheckComplete;
 			instance.Emails.Add(new SlotsEmail());
 		}
 

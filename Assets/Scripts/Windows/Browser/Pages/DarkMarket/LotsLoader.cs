@@ -30,15 +30,15 @@ namespace Windows.Browser.Pages.DarkMarket
 			var location = Locations[Random.Range(0, Locations.Length)];
 			var price = hashRate * Random.Range(0.8f, 1.2f);
 			var lotInfo = new PurchaseLotInfo(name, location, hashRate, price);
-			var availableLots = StaticData.GetInstance().MiningData.AvailableLots;
-			availableLots.Add(lotInfo);
-			if (availableLots.Count > 10)
-				availableLots.RemoveAt(0);
+			// var availableLots = StaticData.GetInstance().MiningData.AvailableLots; TODO
+			// availableLots.Add(lotInfo);
+			// if (availableLots.Count > 10)
+			// 	availableLots.RemoveAt(0);
 		};
 
 		private void Awake()
 		{
-			_lotsInfo = StaticData.GetInstance().MiningData.AvailableLots;
+			// _lotsInfo = StaticData.GetInstance().MiningData.AvailableLots; TODO
 			foreach (var lotInfo in _lotsInfo)
 			{
 				var instLot = Instantiate(lotPrefab, transform);

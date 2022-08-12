@@ -11,11 +11,14 @@ namespace Windows.Miner
 		[SerializeField] private GameObject connectionGame;
 		[SerializeField] private GameField game;
 		[SerializeField] private PopUpNotification notification;
+
 		private string _server;
+		private const int TargetsAmount = 5;
+
 		public void TryConnect()
 		{
 			_server = input.text;
-			if (!StaticData.GetInstance().MiningData.ServersHashRates.ContainsKey(_server))
+			if (!StaticData.GetInstance().MiningData.AvailableServers.Contains(_server))
 			{
 				notification.Appear("Server not found!", NotificationType.Error);
 				return;
@@ -23,7 +26,7 @@ namespace Windows.Miner
 
 			connectionGame.SetActive(true);
 			gameObject.SetActive(false);
-			game.StartGame(5);
+			game.StartGame(TargetsAmount);
 			game.ConnectionScreen = this;
 			input.text = "";
 		}
@@ -33,10 +36,7 @@ namespace Windows.Miner
 			connectionGame.SetActive(false);
 			gameObject.SetActive(true);
 			var miningData = StaticData.GetInstance().MiningData;
-			var hashRate = miningData.ServersHashRates[_server];
-			miningData.ServersHashRates.Remove(_server);
-			miningData.UserHashRate += hashRate;
-			miningData.ConnectedServersCount++;
+			miningData.ConnectServer(_server);
 			notification.Appear("Connection successful!", NotificationType.Success);
 		}
 	}

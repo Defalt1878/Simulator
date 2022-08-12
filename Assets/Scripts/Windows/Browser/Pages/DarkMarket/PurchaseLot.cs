@@ -34,19 +34,19 @@ namespace Windows.Browser.Pages.DarkMarket
 
 		private void Awake()
 		{
-			_lotsInfo = StaticData.GetInstance().MiningData.AvailableLots;
+			//_lotsInfo = StaticData.GetInstance().MiningData.AvailableLots; TODO
 		}
 
 		public void Buy()
 		{
 			var instance = StaticData.GetInstance();
-			if (instance.Stats.Money < _info.Price)
+			if (instance.Stats.Money.Value < _info.Price)
 			{
 				Notification.Appear("Not enough money!", NotificationType.Warning);
 				return;
 			}
 
-			instance.Stats.Money -= _info.Price;
+			instance.Stats.Money.Value -= _info.Price;
 			_lotsInfo.Remove(_info);
 			instance.Emails.Add(new DarkMarketEmail(GenerateAddress(6), _info.HashRate));
 			Notification.Appear("Purchase successful!", NotificationType.Success);

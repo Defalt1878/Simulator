@@ -8,19 +8,19 @@ namespace Windows.Browser.Pages.Email.Data
 	{
 		public override string SenderName => "Unknown";
 		public override string Subject => "CMD";
-		[NonSerialized] private Action<string, string> _checkComplete;
+		[NonSerialized] private Action<IStat> _checkComplete;
 
 		public override void OnLoad()
 		{
 			var instance = StaticData.GetInstance();
 			if (IsCompleted)
 				return;
-			_checkComplete = (_, _) =>
+			_checkComplete = stat =>
 			{
-				if (instance.Stats.Money >= 100)
+				if (((Stat<float>) stat).Value >= 100)
 					OnComplete();
 			};
-			instance.Stats.OnValueChanged += _checkComplete;
+			instance.Stats.Money.OnValueChanged += _checkComplete;
 		}
 
 		public override void OnOpen()
@@ -38,7 +38,7 @@ namespace Windows.Browser.Pages.Email.Data
 			if (IsCompleted)
 				return;
 			IsCompleted = true;
-			instance.Stats.OnValueChanged -= _checkComplete;
+			instance.Stats.Money.OnValueChanged -= _checkComplete;
 			instance.Emails.Add(new MinerEmail());
 		}
 

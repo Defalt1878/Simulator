@@ -29,7 +29,7 @@ namespace Windows.Browser.Pages.Email.Data
 			if (IsRead)
 				return;
 			IsRead = true;
-			instance.MiningData.ServersHashRates[Server] = HashRate;
+			instance.MiningData.NewAvailableServer(Server, HashRate);
 		}
 
 		private protected override string EmailFolder => "DarkMarket";

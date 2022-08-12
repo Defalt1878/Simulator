@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using Windows.Cmd.Services;
-using JetBrains.Annotations;
 using UnityEngine;
 using UserData;
 using Random = UnityEngine.Random;
@@ -57,7 +56,7 @@ namespace Windows.Cmd.Commands.ServerCrack
 
 			Console.Print("Crack successful!", CmdColor.Important);
 			var moneyReceived = (int) Math.Round(Service.Packages.Length * Random.Range(1f, 4f));
-			StaticData.GetInstance().Stats.Money += moneyReceived;
+			StaticData.GetInstance().Stats.Money.Value += moneyReceived;
 			Debug.Log(moneyReceived);
 			_disconnect();
 

@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UserData;
@@ -9,34 +7,19 @@ namespace Windows.Stats
 	public class StatsLoader : MonoBehaviour
 	{
 		[SerializeField] private StatLine statLine;
-		private Dictionary<string, StatLine> _lines;
-		private GameStats _stats;
-		private Action<string, string> _onChangeAction;
 
-		private void Awake()
+		private void Start()
 		{
-			_lines = new Dictionary<string, StatLine>();
-			_stats = StaticData.GetInstance().Stats;
-			foreach (var property in _stats.GetType().GetProperties().Where(prop => prop.Name[^3..] == "Str"))
+			var stats = StaticData.GetInstance().Stats;
+
+			foreach (var stat in stats.GetType().GetProperties()
+				         .Select(property => property.GetValue(stats) as IStat)
+				         .Where(stat => stat is not null)
+			        )
 			{
 				var instLine = Instantiate(statLine, transform);
-				var statName = property.Name[..^3];
-				instLine.Name = statName;
-				instLine.Value = property.GetValue(_stats).ToString();
-				_lines[statName] = instLine;
+				instLine.Stat = stat;
 			}
-
-			_onChangeAction = (statName, newValue) =>
-			{
-				if (_lines.ContainsKey(statName))
-					_lines[statName].Value = newValue;
-			};
-			_stats.OnValueChanged += _onChangeAction;
-		}
-
-		private void OnDestroy()
-		{
-			_stats.OnValueChanged -= _onChangeAction;
 		}
 	}
 }

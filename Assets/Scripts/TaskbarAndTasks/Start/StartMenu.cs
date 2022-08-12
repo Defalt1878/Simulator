@@ -21,13 +21,13 @@ namespace TaskbarAndTasks.Start
 		
 		public void SaveData()
 		{
-			DataSaver.SaveData();
+			StaticData.DataSaver.SaveData();
 			_notification.Appear("Game saved.", NotificationType.Success);
 		}
 		
 		public void ResetData()
 		{
-			DataSaver.ResetData();
+			StaticData.DataSaver.ResetData();
 			_notification.Appear("Game was reset.", NotificationType.Default);
 		}
 	}

@@ -41,9 +41,9 @@ namespace Windows.Miner
 		public GameField CurrentField { get; set; }
 		public Vector2Int Position { get; set; }
 
-		public Color Color
+		public CellColor Color
 		{
-			get => cellImage.color;
+			get => (CellColor) cellImage.color;
 			set => cellImage.color = value;
 		}
 

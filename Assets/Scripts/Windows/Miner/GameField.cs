@@ -65,8 +65,8 @@ namespace Windows.Miner
 			_currentLength = 0;
 			foreach (var cell in _field)
 				cell.Color = cell.Type is CellType.Start
-					? CellColors.CanBeSelected
-					: CellColors.DefaultColor;
+					? CellColor.CanBeSelected
+					: CellColor.DefaultColor;
 		}
 
 		private Vector2Int GetRandomDefaultPos(int tryCount)
@@ -102,7 +102,7 @@ namespace Windows.Miner
 		{
 			if (!_isDragging || !_canBeSelected.Contains(cell.Position))
 				return;
-			cell.Color = CellColors.SelectedColor;
+			cell.Color = CellColor.SelectedColor;
 			_currentLength++;
 
 			if (cell.Type == CellType.Exit)
@@ -110,7 +110,7 @@ namespace Windows.Miner
 				_currentPath.Add(cell.Position);
 				_canBeSelected.Remove(cell.Position);
 				foreach (var pos in _canBeSelected)
-					_field[pos.x, pos.y].Color = CellColors.DefaultColor;
+					_field[pos.x, pos.y].Color = CellColor.DefaultColor;
 				_canBeSelected.Clear();
 				return;
 			}
@@ -125,15 +125,15 @@ namespace Windows.Miner
 		{
 			_canBeSelected.Remove(current);
 			foreach (var pos in _canBeSelected)
-				_field[pos.x, pos.y].Color = CellColors.DefaultColor;
+				_field[pos.x, pos.y].Color = CellColor.DefaultColor;
 			_canBeSelected.Clear();
 			foreach (var cell in
 			         PathFinder.GetNeighbours4(current, FieldSize)
 				         .Select(p => _field[p.x, p.y])
-				         .Where(c => c.Color == CellColors.DefaultColor))
+				         .Where(c => c.Color == CellColor.DefaultColor))
 			{
 				_canBeSelected.Add(cell.Position);
-				cell.Color = CellColors.CanBeSelected;
+				cell.Color = CellColor.CanBeSelected;
 			}
 		}
 

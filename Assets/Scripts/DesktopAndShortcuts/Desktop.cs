@@ -1,4 +1,4 @@
-using Windows.Browser.Pages.Crypto;
+using Windows.Browser.Pages.CryptoMarket;
 using Windows.Browser.Pages.DarkMarket;
 using Notifications;
 using TaskbarAndTasks;

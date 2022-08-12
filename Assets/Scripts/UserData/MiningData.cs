@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Windows.Browser.Pages.DarkMarket;
+using System.Linq;
 
 namespace UserData
 {
@@ -8,28 +8,33 @@ namespace UserData
 	public class MiningData
 	{
 		public float BtcHashRate => 2000000f;
-		private float _userHashRate;
-		public int ConnectedServersCount { get; set; }
 
-		public float UserHashRate
-		{
-			get => _userHashRate;
-			set
-			{
-				_userHashRate = value;
-				OnHashRateChanged?.Invoke(_userHashRate);
-			}
-		}
+		public int ConnectedServersCount { get; private set; }
+		public float UserHashRate { get; private set; }
+		public HashSet<string> AvailableServers => _serversHashRates.Keys.ToHashSet();
 
-		public List<PurchaseLotInfo> AvailableLots { get; }
-		public Dictionary<string, float> ServersHashRates { get; }
+		private Dictionary<string, float> _serversHashRates;
+		// public List<PurchaseLotInfo> AvailableLots { get; }
 
 		public MiningData()
 		{
-			AvailableLots = new List<PurchaseLotInfo>();
-			ServersHashRates = new Dictionary<string, float>();
+			// AvailableLots = new List<PurchaseLotInfo>();
+			_serversHashRates = new Dictionary<string, float>();
 		}
 
-		[field: NonSerialized] public event Action<float> OnHashRateChanged;
+		public void NewAvailableServer(string server, float serverHashRate) =>
+			_serversHashRates[server] = serverHashRate;
+
+		public void ConnectServer(string server)
+		{
+			if (!_serversHashRates.Remove(server, out var serverRate))
+				throw new ArgumentException();
+
+			ConnectedServersCount++;
+			UserHashRate += serverRate;
+			OnNewServerConnected?.Invoke(ConnectedServersCount, UserHashRate);
+		}
+
+		[field: NonSerialized] public event Action<int, float> OnNewServerConnected;
 	}
 }

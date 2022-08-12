@@ -18,15 +18,15 @@ namespace Final
 		public void OnClick()
 		{
 			var instance = StaticData.GetInstance();
-			if (instance.Stats.Money < 1500)
+			if (instance.Stats.Money.Value < 1500)
 				return;
 			GetComponent<Button>().interactable = false;
-			instance.Stats.Money -= 1500;
+			instance.Stats.Money.Value -= 1500;
 			var emails = instance.Emails;
 			(emails.Single(data => data is StartEmail) as StartEmail)?.GameFinished();
 			if (emails.SingleOrDefault(data => data is FinalPayEmail) is FinalPayEmail email)
 				emails.Remove(email);
-			_finalAnimation.StartAnimation(DataSaver.ResetData);
+			_finalAnimation.StartAnimation(StaticData.DataSaver.ResetData);
 		}
 	}
 }

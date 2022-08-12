@@ -18,7 +18,7 @@ namespace Windows.Cmd.Commands.GlobalCommands
 				    a => int.Parse(a[1])))
 				return;
 
-			StaticData.GetInstance().Stats.Money += amount;
+			StaticData.GetInstance().Stats.Money.Value += amount;
 			Console.Print($"${amount:n} was successfully added.", CmdColor.Important);
 		}
 	}
