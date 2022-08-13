@@ -14,6 +14,7 @@ namespace Windows.Cmd.Commands.ServerCrack
 
 
 		public override string Name => "Connect";
+		public override string Description => $"{Name} <ip> - connect to a server.";
 
 		public ConnectCommand(ServerCracker cracker) : base(cracker)
 		{

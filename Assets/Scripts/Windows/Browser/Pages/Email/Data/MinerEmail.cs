@@ -28,7 +28,7 @@ namespace Windows.Browser.Pages.Email.Data
 			if (IsRead)
 				return;
 			IsRead = true;
-			instance.Apps.AddToDownloads("Miner");
+			instance.Apps.AddToDownloads(App.Miner);
 		}
 
 		private void OnComplete()

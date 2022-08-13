@@ -10,6 +10,7 @@ namespace Windows.Cmd.Commands.GlobalCommands
 		}
 
 		public override string Name => "Exit";
+		public override string Description => $"{Name} - close console.";
 		public override void Execute(params string[] args)
 		{
 			if (!TryParse<object>(args, 1, out _))

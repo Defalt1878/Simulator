@@ -1,4 +1,3 @@
-using System.IO;
 using UnityEngine;
 using UserData;
 
@@ -6,8 +5,6 @@ namespace DesktopAndShortcuts
 {
 	public class Shortcuts : MonoBehaviour
 	{
-		private const string ShortcutsPath = "Shortcuts";
-
 		private void Update()
 		{
 			var shortcuts = StaticData.GetInstance().Apps.GetDownloaded();
@@ -19,13 +16,7 @@ namespace DesktopAndShortcuts
 
 			var childCount = transform.childCount;
 			for (var i = 0; i < shortcuts.Count - childCount; i++)
-				InstantiateShortcut(shortcuts[childCount + i]);
-		}
-
-		private void InstantiateShortcut(string shortcutName)
-		{
-			var shortcut = Resources.Load<Shortcut>(Path.Combine(ShortcutsPath, shortcutName));
-			Instantiate(shortcut, transform);
+				Instantiate(shortcuts[childCount + i].LoadShortcut(), transform);
 		}
 	}
 }

@@ -11,6 +11,7 @@ namespace Windows.Cmd.Commands
 		protected readonly Console Console;
 
 		public abstract string Name { get; }
+		public abstract string Description { get; }
 
 		protected ConsoleCommand(TService service)
 		{

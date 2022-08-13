@@ -24,5 +24,8 @@ namespace Windows.Cmd.Services
 
 		public virtual IConsoleCommand GetCommandByName(string name) =>
 			_commands.ContainsKey(name.ToLower()) ? _commands[name.ToLower()] : null;
+
+		public virtual IEnumerable<IConsoleCommand> GetAllCommands() =>
+			_commands.Values;
 	}
 }

@@ -9,7 +9,8 @@ namespace Windows.Cmd.Commands.GlobalCommands
 		}
 
 		public override string Name => "Clear";
-		
+		public override string Description => $"{Name} - clear console.";
+
 		public override void Execute(params string[] args)
 		{
 			if (!TryParse<object>(args, 1, out _))

@@ -53,7 +53,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd00424127b3c3f45a32e1d8a6471348, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  downloadingAppName: 
+  downloadingAppShortcut: {fileID: 0}
+  downloader: {fileID: 4082462692884168274}
 --- !u!1 &4277341944690989625
 GameObject:
   m_ObjectHideFlags: 0
@@ -599,9 +600,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4082462692884168274}
-        m_TargetAssemblyTypeName: Windows.Browser.Sites.Apps.DownloadButton, Assembly-CSharp
-        m_MethodName: OnClick
+      - m_Target: {fileID: 7014133819542018575}
+        m_TargetAssemblyTypeName: Windows.Browser.Pages.Apps.DownloadLink, Assembly-CSharp
+        m_MethodName: Download
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -623,3 +624,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 462054eff4b029747ae2479334d855f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  button: {fileID: 3542734649144320359}
+  buttonImage: {fileID: 8668623463317065091}

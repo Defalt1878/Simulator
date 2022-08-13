@@ -9,6 +9,7 @@ namespace Windows.Cmd.Commands.ServerCrack
 		}
 
 		public override string Name => "Disconnect";
+		public override string Description => $"{Name} - disconnect from current server.";
 
 		public override void Execute(params string[] args)
 		{

@@ -7,22 +7,22 @@ namespace Windows.Browser.Pages.Apps
 	public class DownloadLink : MonoBehaviour
 	{
 		[SerializeField] private Shortcut downloadingAppShortcut;
-		private string _downloadingAppName;
-
-		private DownloadButton _downloadButton;
+		[SerializeField] private Downloader downloader;
+		private App _downloadingApp;
+		private AppsData _apps;
 
 		private void Awake()
 		{
-			_downloadingAppName = downloadingAppShortcut.name;
-			_downloadButton = transform.Find("DownloadButton").GetComponent<DownloadButton>();
-			_downloadButton.DownloadingAppName = _downloadingAppName;
+			_downloadingApp = downloadingAppShortcut.App;
+			_apps = StaticData.GetInstance().Apps;
 		}
 
 		private void Update()
 		{
-			_downloadButton.Active = 
-				StaticData.GetInstance().Apps.CanDownload(_downloadingAppName) &&
-				!_downloadButton.Downloading;
+			downloader.Active = _apps.CanDownload(_downloadingApp) && !downloader.Downloading;
 		}
+ 
+		public void Download() =>
+			downloader.StartDownload(_downloadingApp);
 	}
 }

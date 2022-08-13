@@ -9,6 +9,7 @@ namespace Windows.Cmd.Commands.GlobalCommands
 		}
 
 		public override string Name => "Run";
+		public override string Description => $"{Name} <service> - start service.";
 
 		public override void Execute(params string[] args)
 		{

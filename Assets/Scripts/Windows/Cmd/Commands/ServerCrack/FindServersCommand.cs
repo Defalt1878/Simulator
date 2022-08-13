@@ -14,6 +14,7 @@ namespace Windows.Cmd.Commands.ServerCrack
 		private const float AvailableServerChance = 0.12f;
 
 		public override string Name => "FindServers";
+		public override string Description => $"{Name} <count> - find <count> servers.";
 
 		public FindServersCommand(ServerCracker cracker) : base(cracker)
 		{

@@ -10,6 +10,7 @@ namespace Windows.Cmd.Commands.ServerCrack
 		private const float BlinkDelay = 0.3f;
 
 		public override string Name => "GetPackages";
+		public override string Description => $"{Name} <count> - receive <count> packages from current server.";
 
 		public GetPackagesCommand(ServerCracker cracker) : base(cracker)
 		{

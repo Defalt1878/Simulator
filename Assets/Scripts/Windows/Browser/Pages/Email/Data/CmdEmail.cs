@@ -29,7 +29,7 @@ namespace Windows.Browser.Pages.Email.Data
 			if (IsRead)
 				return;
 			IsRead = true;
-			instance.Apps.AddToDownloads("CMD");
+			instance.Apps.AddToDownloads(App.Cmd);
 		}
 
 		private void OnComplete()

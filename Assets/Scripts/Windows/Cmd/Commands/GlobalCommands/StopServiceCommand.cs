@@ -9,6 +9,7 @@ namespace Windows.Cmd.Commands.GlobalCommands
 		}
 
 		public override string Name => "StopService";
+		public override string Description => $"{Name} - stop service.";
 		public override void Execute(params string[] args)
 		{
 			if(!TryParse<object>(args, 1, out _))

@@ -25,7 +25,7 @@ namespace TaskbarAndTasks
 			while (true)
 			{
 				var instance = StaticData.GetInstance();
-				instance.CurrentInGameTime = instance.CurrentInGameTime.AddMinutes(1);
+				instance.CurrentInGameTime += TimeSpan.FromMinutes(1);
 				yield return new WaitForSeconds(WaitTime);
 				UpdateTimeOutput(instance.CurrentInGameTime);
 				if (instance.CurrentInGameTime.Minute == 0)

@@ -10,7 +10,7 @@ namespace UserData
 	{
 		[NonSerialized] private static IDataSaver _dataSaver = new BinaryDataSaver();
 		public static IDataSaver DataSaver => _dataSaver;
-		
+
 		[NonSerialized] private static StaticData _instance;
 
 		public static StaticData GetInstance() =>
@@ -22,9 +22,8 @@ namespace UserData
 			MiningData = new MiningData();
 			CryptoData = new CryptoData();
 			Emails = new List<EmailData> {new StartEmail()};
-			Apps = new AppsData(new[] {"Browser"}, new[] {"Stats"});
+			Apps = new AppsData(new[] {App.Browser}, new[] {App.Stats});
 			CurrentInGameTime = new DateTime(2022, 7, 1, 0, 0, 0);
-			StartTime = CurrentInGameTime;
 		}
 
 		public UserStats Stats { get; private set; }

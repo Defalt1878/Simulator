@@ -12,6 +12,7 @@ namespace Windows.Cmd.Commands.ServerCrack
 		private const float CrackTimeInSeconds = 7;
 
 		public override string Name => "Crack";
+		public override string Description => $"{Name} <packages> - crack current server.";
 
 		private readonly Action _disconnect;
 

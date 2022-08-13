@@ -34,6 +34,9 @@ namespace Windows.Cmd.Services
 		public override IConsoleCommand GetCommandByName(string name) =>
 			base.GetCommandByName(name) ?? CurrentService?.GetCommandByName(name);
 
+		public override IEnumerable<IConsoleCommand> GetAllCommands() =>
+			base.GetAllCommands().Concat(CurrentService?.GetAllCommands() ?? Array.Empty<IConsoleCommand>());
+
 		private Dictionary<string, ConsoleService> GetServices()
 		{
 			var baseServiceType = typeof(ConsoleService);
